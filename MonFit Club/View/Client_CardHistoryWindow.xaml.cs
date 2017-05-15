@@ -10,24 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 
-namespace MonFit_Club
+namespace MonFit_Club.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Client_CardHistoryWindow.xaml
     /// </summary>
-    public partial class MainWindow
+    public partial class Client_CardHistoryWindow
     {
-        public MainWindow()
+        public Client_CardHistoryWindow()
         {
             InitializeComponent();
-          //  MonFit_Club.View.ClientWindow cw = new View.ClientWindow();
-           // cw.Show();
-            MonFit_Club.View.DoctorWindow doc = new View.DoctorWindow();
-            doc.Show();
         }
     }
 }

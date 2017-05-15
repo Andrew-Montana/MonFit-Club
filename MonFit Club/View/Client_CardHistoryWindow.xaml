@@ -1,0 +1,11 @@
+﻿<Controls:MetroWindow x:Class="MonFit_Club.View.Client_CardHistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Client_CardHistoryWindow" Height="300" Width="500" WindowStartupLocation="CenterScreen">
+    <Border BorderBrush="#4BAD6C" BorderThickness="2">
+        <Grid>
+            <DataGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="True"></DataGrid>
+        </Grid>
+    </Border>
+</Controls:MetroWindow>
