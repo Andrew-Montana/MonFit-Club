@@ -68,7 +68,14 @@ namespace MonFit_Club.ViewModel
                     {
                         if (selectedValue != null)
                         {
-                            
+                            if (login != "" && password != "")
+                            {
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("Введите логин или пароль", "Ошибка");
+                            }
                         }
                         else
                         {
