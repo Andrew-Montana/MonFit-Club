@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using MonFit_Club.ViewModel;
 
 namespace MonFit_Club
 {
@@ -26,7 +27,7 @@ namespace MonFit_Club
             InitializeComponent();
           //  MonFit_Club.View.ClientWindow cw = new View.ClientWindow();
            // cw.Show();
-            DataContext = new ViewModel.LoginViewModel();
+            DataContext = new LoginViewModel();
         }
     }
 }

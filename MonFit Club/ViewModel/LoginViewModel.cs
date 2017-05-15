@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using MonFit_Club.Command;
 
 namespace MonFit_Club.ViewModel
 {
@@ -52,6 +53,32 @@ namespace MonFit_Club.ViewModel
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+
+        // MVVM Commands
+
+        #region LoginCommand
+
+        private RelayCommand loginCommand;
+        public RelayCommand LoginCommand
+        {
+            get
+            {
+                return loginCommand ??
+                    (loginCommand = new RelayCommand(obj =>
+                    {
+                        if (selectedValue != null)
+                        {
+                            
+                        }
+                        else
+                        {
+                            MessageBox.Show("Выберите кем Вы являетесь (Клиент/Сотрудник)","Ошибка");
+                        }
+                    }));
+            }
+        }
+
+        #endregion
 
     }
 }
