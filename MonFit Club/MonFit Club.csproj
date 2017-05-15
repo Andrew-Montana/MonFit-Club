@@ -67,6 +67,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CardHistory.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Leave_Out.cs" />
+    <Compile Include="Models\MedCard.cs" />
+    <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\Schedule_Client_Visit.cs" />
+    <Compile Include="Models\Tbl_MedCard_Emp.cs" />
+    <Compile Include="Models\TrainRoutine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -92,6 +101,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
