@@ -53,7 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -61,21 +61,22 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="View\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\CardHistory.cs" />
-    <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\Leave_Out.cs" />
-    <Compile Include="Models\MedCard.cs" />
-    <Compile Include="Models\Schedule.cs" />
-    <Compile Include="Models\Schedule_Client_Visit.cs" />
-    <Compile Include="Models\Tbl_MedCard_Emp.cs" />
-    <Compile Include="Models\TrainRoutine.cs" />
+    <Compile Include="Model\CardHistory.cs" />
+    <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\Leave_Out.cs" />
+    <Compile Include="Model\MedCard.cs" />
+    <Compile Include="Model\Schedule.cs" />
+    <Compile Include="Model\Schedule_Client_Visit.cs" />
+    <Compile Include="Model\Tbl_MedCard_Emp.cs" />
+    <Compile Include="Model\TrainRoutine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -102,10 +103,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
