@@ -26,7 +26,7 @@ namespace MonFit_Club
             InitializeComponent();
           //  MonFit_Club.View.ClientWindow cw = new View.ClientWindow();
            // cw.Show();
-           
+            DataContext = new ViewModel.LoginViewModel();
         }
     }
 }

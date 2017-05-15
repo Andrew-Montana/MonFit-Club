@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="Login" Height="450" Width="325" WindowStartupLocation="CenterScreen">
+        xmlns:password="clr-namespace:MonFit_Club.Infrastructure" 
+        Title="Login" Height="456" Width="325" WindowStartupLocation="CenterScreen">
     <Border BorderBrush="#4BAD6C" BorderThickness="2">
         <Grid>
             <!-- Grid 4x3 -->
@@ -25,14 +26,16 @@
             <!-- Row №2-3 -->
             <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
                 <Label Content="Вы заходите как..."></Label>
-                <ComboBox>
+                <ComboBox Text="{Binding Path=SelectedValue, Mode=OneWay}">
                     <ComboBoxItem Content="Клиент"></ComboBoxItem>
                     <ComboBoxItem Content="Сотрудник"></ComboBoxItem>
                 </ComboBox>
                 <Label Content="ID"></Label>
-                <TextBox></TextBox>
+                <TextBox Text="{Binding Path=Login, Mode=OneWay}"></TextBox>
                 <Label Content="Пароль"></Label>
-                <PasswordBox></PasswordBox>
+                <PasswordBox password:BoundPasswordBox.BoundPassword="{Binding Path=Password,
+        Mode=TwoWay,
+        UpdateSourceTrigger=PropertyChanged}"></PasswordBox>
             </StackPanel>
             <!-- Row №4 -->
             <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,15,0,0">
