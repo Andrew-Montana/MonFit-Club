@@ -48,8 +48,15 @@
                 </Grid>
             </TabItem>
                 <TabItem Header="Расписание" Background="#3D3C36">
-                
-            </TabItem>
+                    <DataGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" ItemsSource="{Binding Schedules}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="День Визита" Binding="{Binding Date_Visit, Mode=TwoWay}"/>
+                            <DataGridTextColumn Header="Время" Binding="{Binding Time_Visit, Mode=TwoWay}"/>
+                            <DataGridTextColumn Header="Сотрудник" Binding="{Binding Employee_Full_Name, Mode=TwoWay}"/>
+                            <DataGridTextColumn Header="Заметка" Binding="{Binding Visit_Type, Mode=TwoWay}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
                 <TabItem Header="Ваша программа" Background="#3D3C36"></TabItem>
                 <TabItem Header="Ваша мед.карта" Background="#3D3C36"></TabItem>
             

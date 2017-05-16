@@ -18,6 +18,7 @@ namespace MonFit_Club.ViewModel
     {
         static private int client_id;
         public ObservableCollection<Client> Person { get; set; }
+        public ObservableCollection<Schedule> Schedules { get; set; }
 
         static public int Client_Id { get { return client_id; } set { client_id = value; } }
 
@@ -51,6 +52,32 @@ namespace MonFit_Club.ViewModel
                      new Client { Id = client_id, Phone_Number = phone_number, Password = password, Gender = gender, Full_Name = full_name, Card_Type = card_type, Card_Period = card_period_begin + " - " + card_begin_end}
                 };
   
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+            finally { DataBase.connect.Close(); }
+
+            // Вкладка Расписание
+            query = string.Format(@"SELECT s.time_visit, s.date_visit, e.full_name, s.visit_type FROM schedule s, employee e
+                                    WHERE client_id_list @> ARRAY[{0}] AND e.id = s.employee_id;", client_id);
+            command = new NpgsqlCommand(query, DataBase.connect);
+            DataBase.connect.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+                NpgsqlDataReader reader = command.ExecuteReader();
+                Schedules = new ObservableCollection<Schedule>();
+                while (reader.Read())
+                {
+                    Schedules.Add(
+                    new Schedule() {
+                        Date_Visit = reader["date_visit"].ToString(),
+                        Time_Visit = reader["time_visit"].ToString(),
+                        Visit_Type = reader["visit_type"].ToString(),
+                        Employee_Full_Name = reader["full_name"].ToString()
+                    }
+                      );
+                }
+                reader.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
             finally { DataBase.connect.Close(); }
