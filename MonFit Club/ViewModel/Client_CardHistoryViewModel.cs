@@ -24,20 +24,34 @@ namespace MonFit_Club.ViewModel
         // instructor 
        public Client_CardHistoryViewModel()
        {
-
            NpgsqlConnection connect = new NpgsqlConnection() { ConnectionString = DataBase.connect_params };
-           string query = string.Format("SELECT * FROM cardHistory WHERE client_id = {0}", client_id.ToString());
+           string query = string.Format(@"SELECT * FROM cardHistory WHERE client_id = '{0}';", client_id.ToString());
            NpgsqlCommand command = new NpgsqlCommand(query, connect);
            connect.Open();
            try
            {
                command.ExecuteNonQuery();
                NpgsqlDataReader reader = command.ExecuteReader();
+               List<CardHistory> list = new List<CardHistory>();
                while (reader.Read())
                {
-                   CardHistory cardHistory_item = new CardHistory() { Card_Type = reader["card_type"].ToString(), Client_Id = client_id, Condition = reader["condition"].ToString(), Data_Set = reader["data_set"].ToString(), Payment = Convert.ToDouble(reader["payment"].ToString()) };
-                   CardHistories.Add(cardHistory_item);
+                   MessageBox.Show("reader");
+                   list.Add(
+                       new CardHistory { Card_Type = reader["card_type"].ToString(), Client_Id = client_id,
+                           Condition = reader["condition"].ToString(), Data_Set = reader["date_set"].ToString(),
+                           Payment = Convert.ToDouble(reader["payment"].ToString()) }
+                       );
                }
+               foreach (var item in list)
+               {
+                   MessageBox.Show(item.Payment.ToString());
+               }
+               /*
+                * 
+                CardHistories = new ObservableCollection<CardHistory> {
+                   new CardHistory { Card_Type = reader["card_type"].ToString(), Client_Id = client_id, Condition = reader["condition"].ToString(), Data_Set = reader["date_set"].ToString(), Payment = Convert.ToDouble(reader["payment"].ToString()) }
+               
+                */
                
 
            }
