@@ -58,7 +58,18 @@
                     </DataGrid>
                 </TabItem>
                 <TabItem Header="Ваша программа" Background="#3D3C36"></TabItem>
-                <TabItem Header="Ваша мед.карта" Background="#3D3C36"></TabItem>
+                <TabItem Header="Ваша мед.карта" Background="#3D3C36">
+                    <DataGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" ItemsSource="{Binding MedCards}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Рекомендации" Binding="{Binding Recommend, Mode=TwoWay}"/>
+                            <DataGridTextColumn Header="Вес" Binding="{Binding Weight, Mode=TwoWay}"/>
+                            <DataGridTextColumn Header="Рост" Binding="{Binding Height, Mode=TwoWay}"/>
+                            <DataGridTextColumn Header="Тип телосложения" Binding="{Binding BodyType, Mode=TwoWay}"/>
+                            <DataGridTextColumn Header="Проблемы" Binding="{Binding Problems, Mode=TwoWay}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    
+                </TabItem>
             
         </TabControl>
     </Grid>

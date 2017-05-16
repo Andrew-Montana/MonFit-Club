@@ -19,6 +19,7 @@ namespace MonFit_Club.ViewModel
         static private int client_id;
         public ObservableCollection<Client> Person { get; set; }
         public ObservableCollection<Schedule> Schedules { get; set; }
+        public ObservableCollection<MedCard> MedCards { get; set; }
 
         static public int Client_Id { get { return client_id; } set { client_id = value; } }
 
@@ -74,6 +75,33 @@ namespace MonFit_Club.ViewModel
                         Time_Visit = reader["time_visit"].ToString(),
                         Visit_Type = reader["visit_type"].ToString(),
                         Employee_Full_Name = reader["full_name"].ToString()
+                    }
+                      );
+                }
+                reader.Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+            finally { DataBase.connect.Close(); }
+
+            // ### Мед.Карта Вкладка
+            query = string.Format(@"SELECT weight, recommend, height, problems, bodytype FROM medcard WHERE client_id = {0};", client_id);
+            command = new NpgsqlCommand(query, DataBase.connect);
+            DataBase.connect.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+                NpgsqlDataReader reader = command.ExecuteReader();
+                MedCards = new ObservableCollection<MedCard>();
+                while (reader.Read())
+                {
+                    MedCards.Add(
+                    new MedCard()
+                    {
+                        Recommend = reader["recommend"].ToString(),
+                        Weight = Convert.ToDouble(reader["weight"].ToString()),
+                        Height = Convert.ToDouble(reader["height"].ToString()),
+                        Problems = reader["problems"].ToString(),
+                        BodyType = reader["bodytype"].ToString()
                     }
                       );
                 }
