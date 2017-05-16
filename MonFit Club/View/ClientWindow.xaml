@@ -34,14 +34,16 @@
                         <Label Content="Карта" HorizontalAlignment="Right"></Label>
                         <Label Content="Срок" HorizontalAlignment="Right"></Label>
                     </StackPanel>
-                    <StackPanel Grid.Row="1" Grid.Column="1">
+                            
                         <!-- Labels Right Side. Binding -->
-                        <Label Content="{Binding Path=Client_Id, Mode=TwoWay}"></Label>
-                        <Label></Label>
-                        <Label></Label>
-                        <Label></Label>
-                    </StackPanel>
-                    <!-- stackPanels end-->
+                        <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding Person}">
+                            <Label Content="{Binding Path=Id, Mode=TwoWay}"></Label>
+                            <Label Content="{Binding Path=Full_Name, Mode=TwoWay}"></Label>
+                            <Label Content="{Binding Path=Card_Type, Mode=TwoWay}"></Label>
+                            <Label Content="{Binding Path=Id, Mode=TwoWay}"></Label>
+                        </StackPanel>
+
+                        <!-- stackPanels end-->
                         <Label Content="История покупок" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"></Label>
                 </Grid>
             </TabItem>
