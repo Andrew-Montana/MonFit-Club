@@ -1,4 +1,6 @@
-﻿using MonFit_Club.Models;
+﻿using MonFit_Club.Command;
+using MonFit_Club.Models;
+using MonFit_Club.View;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -19,7 +21,7 @@ namespace MonFit_Club.ViewModel
 
         static public int Client_Id { get { return client_id; } set { client_id = value; } }
 
-
+        // Конструктор
         public ClientViewModel()
         {
             string full_name = "", gender = "", phone_number = "", card_type = "", card_period_begin = "", card_begin_end = "", password = "";
@@ -45,7 +47,7 @@ namespace MonFit_Club.ViewModel
                 }
                 Person = new ObservableCollection<Client>
                 {
-                     new Client { Id = client_id, Phone_Number = phone_number, Password = password, Gender = gender, Full_Name = full_name, Card_Type = card_type, Card_Period_Begin = card_period_begin, Card_Period_End = card_begin_end}
+                     new Client { Id = client_id, Phone_Number = phone_number, Password = password, Gender = gender, Full_Name = full_name, Card_Type = card_type, Card_Period = card_period_begin + " - " + card_begin_end}
                 };
   
             }
@@ -58,6 +60,22 @@ namespace MonFit_Club.ViewModel
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        // mvvm commands
+        private RelayCommand cardHistoryOpenCommand;
+        public RelayCommand CardHistoryOpenCommand
+        {
+            get
+            {
+                return cardHistoryOpenCommand ??
+                    (cardHistoryOpenCommand = new RelayCommand(obj =>
+                    {
+                        Client_CardHistoryWindow window = new Client_CardHistoryWindow();
+                        Client_CardHistoryViewModel.Client_Id = client_id;
+                        window.Show();
+                    }));
+            }
         }
 
     }

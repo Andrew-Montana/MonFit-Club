@@ -40,11 +40,11 @@
                             <Label Content="{Binding Path=Id, Mode=TwoWay}"></Label>
                             <Label Content="{Binding Path=Full_Name, Mode=TwoWay}"></Label>
                             <Label Content="{Binding Path=Card_Type, Mode=TwoWay}"></Label>
-                            <Label Content="{Binding Path=Id, Mode=TwoWay}"></Label>
+                            <Label Content="{Binding Path=Card_Period, Mode=TwoWay}"></Label>
                         </StackPanel>
 
                         <!-- stackPanels end-->
-                        <Label Content="История покупок" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"></Label>
+                        <Button Command="{Binding CardHistoryOpenCommand}" Content="История покупок" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ></Button>
                 </Grid>
             </TabItem>
                 <TabItem Header="Расписание" Background="#3D3C36">

@@ -12,7 +12,7 @@ namespace MonFit_Club.Models
     {
         private string data_set;
         private string card_type;
-        private string client_id;
+        private int client_id;
         private string condition;
         private double payment;
 
@@ -36,7 +36,7 @@ namespace MonFit_Club.Models
             }
         }
 
-        public string Client_Id
+        public int Client_Id
         {
             get { return client_id; }
             set

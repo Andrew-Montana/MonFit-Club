@@ -15,8 +15,7 @@ namespace MonFit_Club.Models
         private string gender;
         private string phone_number;
         private string card_type;
-        private string card_period_begin;
-        private string card_period_end;
+        private string card_period;
         private string password;
 
         public int Id
@@ -69,25 +68,16 @@ namespace MonFit_Club.Models
             }
         }
 
-        public string Card_Period_Begin
+        public string Card_Period
         {
-            get { return card_period_begin; }
+            get { return card_period; }
             set
             {
-                card_period_begin = value;
-                OnPropertyChanged("Card_Period_Begin");
+                card_period = value;
+                OnPropertyChanged("Card_Period");
             }
         }
 
-        public string Card_Period_End
-        {
-            get { return card_period_end; }
-            set
-            {
-                card_period_end = value;
-                OnPropertyChanged("Card_Period_End");
-            }
-        }
 
         public string Password
         {
