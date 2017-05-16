@@ -121,7 +121,11 @@ namespace MonFit_Club.ViewModel
                     }
                     if (position == "Врач")
                     {
-                        MessageBox.Show("Окно доктора не готово");
+                        int x;
+                        x = Convert.ToInt32(id);
+                        DoctorViewModel.Employee_Id = x;
+                        DoctorWindow doctorWindow = new DoctorWindow();
+                        doctorWindow.Show();
                     }
                     if (position == "Администратор")
                     {
