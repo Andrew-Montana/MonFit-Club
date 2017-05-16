@@ -36,7 +36,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="1">
                         <!-- Labels Right Side. Binding -->
-                        <Label></Label>
+                        <Label Content="{Binding Path=Client_Id, Mode=TwoWay}"></Label>
                         <Label></Label>
                         <Label></Label>
                         <Label></Label>

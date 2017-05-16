@@ -103,6 +103,9 @@ namespace MonFit_Club.ViewModel
             if (table == "client" && isAuth == true)
             {
                 App.Current.MainWindow.Hide();
+                int x;
+                x = Convert.ToInt32(id);
+                ClientViewModel.Client_Id = x;
                 ClientWindow clientWindow = new ClientWindow();
                 clientWindow.Show();
             }
