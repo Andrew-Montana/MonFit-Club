@@ -13,6 +13,6 @@ namespace MonFit_Club
         private static string userId = "postgres";
         private static string password = "123";
         private static string database = "ovdejchuk_FitnessClub";
-        protected static string connect_params = String.Format("Server={0};Port={1};User Id={2};Password={3};Database={4};", server, port, userId, password, database);
+        public static string connect_params = String.Format("Server={0};Port={1};User Id={2};Password={3};Database={4};", server, port, userId, password, database);
     }
 }

@@ -8,5 +8,6 @@ namespace MonFit_Club.Models
 {
     class Employee
     {
+        
     }
 }

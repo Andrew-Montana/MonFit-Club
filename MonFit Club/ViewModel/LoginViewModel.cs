@@ -8,6 +8,8 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using MonFit_Club.Command;
+using Npgsql;
+using MonFit_Club.View;
 
 namespace MonFit_Club.ViewModel
 {
@@ -54,7 +56,81 @@ namespace MonFit_Club.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
-        // MVVM Commands
+        // DataBase command. Auth
+
+        static public void Auth(string table, string id, string password)
+        {
+            int count = 0;
+            string position = "";
+            bool isAuth = false;
+
+            NpgsqlConnection connect = new NpgsqlConnection() { ConnectionString = DataBase.connect_params };
+
+            string query = string.Format(@"SELECT * FROM {0} WHERE id='{1}' AND password='{2}';", table, id, password);
+
+            NpgsqlCommand command = new NpgsqlCommand(query, connect);
+            connect.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+                NpgsqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    count++;
+                    if (table != "client" && table == "employee")
+                        position = reader["position"].ToString();
+                }
+                if (count == 1)
+                {
+                    MessageBox.Show("Вы успешно авторизировались");
+                    isAuth = true;
+                }
+                else
+                {
+                    MessageBox.Show("Неправильный ID или пароль");
+                    isAuth = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connect.Close();
+            }
+
+            if (table == "client" && isAuth == true)
+            {
+                App.Current.MainWindow.Hide();
+                ClientWindow clientWindow = new ClientWindow();
+                clientWindow.Show();
+            }
+            else
+            {
+                if (table == "employee" && isAuth == true)
+                {
+                    if (position.Contains("Инструктор"))
+                    {
+                        MessageBox.Show("Окно инструктора не готово");
+                        // а вообще, передать параметры в свойства класса.
+                    }
+                    if (position == "Врач")
+                    {
+                        MessageBox.Show("Окно доктора не готово");
+                    }
+                    if (position == "Администратор")
+                    {
+                        MessageBox.Show("Окно администратора не готово");
+                    }
+                    App.Current.MainWindow.Hide();
+                    
+                }
+            }
+
+        }
+
+        // MVVM Commands. Action binded with button
 
         #region LoginCommand
 
@@ -68,9 +144,23 @@ namespace MonFit_Club.ViewModel
                     {
                         if (selectedValue != null)
                         {
-                            if (login != "" && password != "")
+                            string table = "";
+                            if(selectedValue == "Клиент")
+                                table = "client";
+                            else
+                                table = "employee";
+                            if (login != "" && password != null)
                             {
-
+                                int x;
+                                bool isNumeric = int.TryParse(login, out x);
+                                if (isNumeric)
+                                {
+                                    Auth(table, login, password);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Логин должен состоять исключительно из цифр", "Ошибка");
+                                }
                             }
                             else
                             {
