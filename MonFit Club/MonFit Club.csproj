@@ -123,7 +123,7 @@
     <Compile Include="Model\MedCard.cs" />
     <Compile Include="Model\Schedule.cs" />
     <Compile Include="Model\Schedule_Client_Visit.cs" />
-    <Compile Include="Model\Tbl_MedCard_Emp.cs" />
+    <Compile Include="Model\Tbl_MCard_Emp.cs" />
     <Compile Include="Model\TrainRoutine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
