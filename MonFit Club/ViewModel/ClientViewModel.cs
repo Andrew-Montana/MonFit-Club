@@ -26,12 +26,12 @@ namespace MonFit_Club.ViewModel
         {
             string full_name = "", gender = "", phone_number = "", card_type = "", card_period_begin = "", card_begin_end = "", password = "";
 
-            NpgsqlConnection connect = new NpgsqlConnection() { ConnectionString = DataBase.connect_params };
+           // NpgsqlConnection connect = new NpgsqlConnection() { ConnectionString = DataBase.connect_params };
 
             string query = string.Format(@"SELECT phone_number, password, gender, full_name, card_type, card_period[1][1] as begin, card_period[2][1] as end FROM client WHERE id = {0};",client_id);
 
-            NpgsqlCommand command = new NpgsqlCommand(query, connect);
-            connect.Open();
+            NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+            DataBase.connect.Open();
             try {
                 command.ExecuteNonQuery();
                 NpgsqlDataReader reader = command.ExecuteReader();
@@ -45,6 +45,7 @@ namespace MonFit_Club.ViewModel
                     card_begin_end = reader["end"].ToString();
                     password = reader["password"].ToString();
                 }
+                reader.Close();
                 Person = new ObservableCollection<Client>
                 {
                      new Client { Id = client_id, Phone_Number = phone_number, Password = password, Gender = gender, Full_Name = full_name, Card_Type = card_type, Card_Period = card_period_begin + " - " + card_begin_end}
@@ -52,7 +53,7 @@ namespace MonFit_Club.ViewModel
   
             }
             catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
-            finally { connect.Close(); }
+            finally { DataBase.connect.Close(); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -71,8 +72,8 @@ namespace MonFit_Club.ViewModel
                 return cardHistoryOpenCommand ??
                     (cardHistoryOpenCommand = new RelayCommand(obj =>
                     {
-                        Client_CardHistoryWindow window = new Client_CardHistoryWindow();
                         Client_CardHistoryViewModel.Client_Id = client_id;
+                        Client_CardHistoryWindow window = new Client_CardHistoryWindow();
                         window.Show();
                     }));
             }

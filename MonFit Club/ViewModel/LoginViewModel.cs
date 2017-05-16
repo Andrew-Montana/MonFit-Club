@@ -64,12 +64,12 @@ namespace MonFit_Club.ViewModel
             string position = "";
             bool isAuth = false;
 
-            NpgsqlConnection connect = new NpgsqlConnection() { ConnectionString = DataBase.connect_params };
+            //NpgsqlConnection connect = new NpgsqlConnection() { ConnectionString = DataBase.connect_params };
 
             string query = string.Format(@"SELECT * FROM {0} WHERE id='{1}' AND password='{2}';", table, id, password);
 
-            NpgsqlCommand command = new NpgsqlCommand(query, connect);
-            connect.Open();
+            NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+            DataBase.connect.Open();
             try
             {
                 command.ExecuteNonQuery();
@@ -80,6 +80,7 @@ namespace MonFit_Club.ViewModel
                     if (table != "client" && table == "employee")
                         position = reader["position"].ToString();
                 }
+                reader.Close();
                 if (count == 1)
                 {
                     MessageBox.Show("Вы успешно авторизировались");
@@ -97,7 +98,7 @@ namespace MonFit_Club.ViewModel
             }
             finally
             {
-                connect.Close();
+                DataBase.connect.Close();
             }
 
             if (table == "client" && isAuth == true)

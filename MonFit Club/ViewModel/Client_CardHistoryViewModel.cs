@@ -24,42 +24,30 @@ namespace MonFit_Club.ViewModel
         // instructor 
        public Client_CardHistoryViewModel()
        {
-           NpgsqlConnection connect = new NpgsqlConnection() { ConnectionString = DataBase.connect_params };
+           //NpgsqlConnection connect = new NpgsqlConnection() { ConnectionString = DataBase.connect_params };
            string query = string.Format(@"SELECT * FROM cardHistory WHERE client_id = '{0}';", client_id.ToString());
-           NpgsqlCommand command = new NpgsqlCommand(query, connect);
-           connect.Open();
+           NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+           DataBase.connect.Open();
            try
            {
                command.ExecuteNonQuery();
                NpgsqlDataReader reader = command.ExecuteReader();
-               List<CardHistory> list = new List<CardHistory>();
+               CardHistories = new ObservableCollection<CardHistory>();
                while (reader.Read())
                {
-                   MessageBox.Show("reader");
-                   list.Add(
-                       new CardHistory { Card_Type = reader["card_type"].ToString(), Client_Id = client_id,
-                           Condition = reader["condition"].ToString(), Data_Set = reader["date_set"].ToString(),
-                           Payment = Convert.ToDouble(reader["payment"].ToString()) }
-                       );
+                   CardHistories.Add( 
+                   new CardHistory() { Card_Type = reader["card_type"].ToString(), Client_Id = client_id, Condition = reader["condition"].ToString(), Data_Set = reader["date_set"].ToString(), Payment = Convert.ToDouble(reader["payment"].ToString()) }
+                     );
                }
-               foreach (var item in list)
-               {
-                   MessageBox.Show(item.Payment.ToString());
-               }
-               /*
-                * 
-                CardHistories = new ObservableCollection<CardHistory> {
-                   new CardHistory { Card_Type = reader["card_type"].ToString(), Client_Id = client_id, Condition = reader["condition"].ToString(), Data_Set = reader["date_set"].ToString(), Payment = Convert.ToDouble(reader["payment"].ToString()) }
-               
-                */
-               
+               reader.Close();
+
 
            }
            catch (Exception ex)
            {
                MessageBox.Show(ex.Message.ToString());
            }
-           finally { connect.Close(); }
+           finally { DataBase.connect.Close(); }
        }
 
 
