@@ -1,4 +1,5 @@
-﻿using MonFit_Club.Models;
+﻿using MonFit_Club.Command;
+using MonFit_Club.Models;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,24 @@ namespace MonFit_Club.ViewModel
 {
     class DoctorViewModel : INotifyPropertyChanged
     {
-        static private int employee_id;
+        //parametrs for sending to database
+        private string idP;
+        private string weightP;
+        private string recommendP;
+        private string heightP;
+        private string problemsP;
+        private string bodytypeP;
 
+        public string IdP { get { return idP; } set { idP = value; OnPropertyChanged("IdP"); MessageBox.Show(idP); } }
+        public string WeightP { get { return weightP; } set { weightP = value; OnPropertyChanged("WeightP"); } }
+        public string RecommendP { get { return recommendP; } set { recommendP = value; OnPropertyChanged("RecommendP"); } }
+        public string HeightP { get { return heightP; } set { heightP = value; OnPropertyChanged("HeightP"); } }
+        public string ProblemsP { get { return problemsP; } set { problemsP = value; OnPropertyChanged("ProblemsP"); } }
+        public string BodyTypeP { get { return bodytypeP; } set { bodytypeP = value; OnPropertyChanged("BodyTypeP"); } }
+
+        // id
+        static private int employee_id;
+        // collections
         public ObservableCollection<Employee> Person { get; set; }
         public ObservableCollection<MedCard> MedCards { get; set; }
 
@@ -90,6 +107,20 @@ namespace MonFit_Club.ViewModel
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        // MVVM Command
+        private RelayCommand sendDataCommand;
+        public RelayCommand SendDataCommand
+        {
+            get
+            {
+                return sendDataCommand ??
+                    (sendDataCommand = new RelayCommand(obj =>
+                    {
+                        
+                    }));
+            }
         }
 
     }

@@ -69,17 +69,17 @@
                         <TabItem Header="Добавить">
                             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <Label Content="ID клиента"/>
-                                <TextBox></TextBox>
+                                <TextBox Text="{Binding Path=IdP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 										<Label Content="Вес"/>
-                                <TextBox></TextBox>
+                                <TextBox Text="{Binding Path=WeightP,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="Рекомендация"/>
-                                <TextBox></TextBox>
+                                <TextBox Text="{Binding Path=RecommendP,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="Рост"/>
-                                <TextBox></TextBox>
+                                <TextBox Text="{Binding Path=HeightP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="Проблемы"/>
-                                <TextBox></TextBox>
+                                <TextBox Text="{Binding Path=ProblemsP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="Тип телосложения"/>
-                                <TextBox></TextBox>
+                                <TextBox Text="{Binding Path=BodyTypeP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Button Margin="0,24,0,0" Content="Отправить"/>
                             </StackPanel>
 
