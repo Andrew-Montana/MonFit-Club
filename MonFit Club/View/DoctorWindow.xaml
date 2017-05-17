@@ -66,7 +66,24 @@
                                 </DataGrid>
                             </StackPanel>
                         </TabItem>
-                        <TabItem Header="Добавить"></TabItem>
+                        <TabItem Header="Добавить">
+                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Label Content="ID клиента"/>
+                                <TextBox></TextBox>
+										<Label Content="Вес"/>
+                                <TextBox></TextBox>
+                                <Label Content="Рекомендация"/>
+                                <TextBox></TextBox>
+                                <Label Content="Рост"/>
+                                <TextBox></TextBox>
+                                <Label Content="Проблемы"/>
+                                <TextBox></TextBox>
+                                <Label Content="Тип телосложения"/>
+                                <TextBox></TextBox>
+                                <Button Margin="0,24,0,0" Content="Отправить"/>
+                            </StackPanel>
+
+                        </TabItem>
                         <TabItem Header="Изменить"></TabItem>
                     </TabControl>
                     
