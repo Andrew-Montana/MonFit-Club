@@ -34,12 +34,15 @@
                             <Label Content="Должность" HorizontalAlignment="Right"></Label>
                             <Label Content="Зарплата" HorizontalAlignment="Right"></Label>
                         </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.Column="1">
+                        <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding Person}">
                             <!-- Labels Right Side. Binding -->
-                            <Label></Label>
-                            <Label></Label>
-                            <Label></Label>
-                            <Label></Label>
+                            <Label Content="{Binding Id}"></Label>
+                            <Label Content="{Binding Full_Name}"></Label>
+                            <Label Content="{Binding Position}"></Label>
+                            <TextBlock Margin="6,6,0,0">
+                                <Run Text="{Binding Salary}"/>
+                                <Run Text="$"/>
+                            </TextBlock>
                         </StackPanel>
                         <!-- stackPanels end-->
                         <!-- Something else to add in last row. Later-->
