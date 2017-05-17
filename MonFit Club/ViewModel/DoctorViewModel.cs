@@ -17,6 +17,7 @@ namespace MonFit_Club.ViewModel
         static private int employee_id;
 
         public ObservableCollection<Employee> Person { get; set; }
+        public ObservableCollection<MedCard> MedCards { get; set; }
 
         static public int Employee_Id { get { return employee_id; } set { employee_id = value; } }
 
@@ -50,6 +51,34 @@ namespace MonFit_Club.ViewModel
                      new Employee { Experience_Start = experience_start, Full_Name = full_name, Gender = gender, Id = employee_id, Password = password, Phone_Number = phone_number, Position = position, Salary = salary}
                 };
 
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+            finally { DataBase.connect.Close(); }
+
+            // # Мед.Карта > Просмотреть
+            query = string.Format(@"SELECT * FROM medcard;");
+            command = new NpgsqlCommand(query, DataBase.connect);
+            DataBase.connect.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+                NpgsqlDataReader reader = command.ExecuteReader();
+                MedCards = new ObservableCollection<MedCard>();
+                while (reader.Read())
+                {
+                    MedCards.Add(
+                    new MedCard() {
+                        BodyType = reader["bodytype"].ToString(),
+                        Problems = reader["problems"].ToString(),
+                        Weight = Convert.ToDouble(reader["weight"].ToString()),
+                        Height = Convert.ToDouble(reader["height"].ToString()),
+                        Client_Id = Convert.ToInt32(reader["client_id"].ToString()),
+                        Id = Convert.ToInt32(reader["id"].ToString()),
+                        Recommend = reader["recommend"].ToString()
+                    }
+                      );
+                }
+                reader.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
             finally { DataBase.connect.Close(); }
