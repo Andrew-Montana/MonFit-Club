@@ -23,7 +23,7 @@ namespace MonFit_Club.ViewModel
         private string problemsP;
         private string bodytypeP;
 
-        public string IdP { get { return idP; } set { idP = value; OnPropertyChanged("IdP"); MessageBox.Show(idP); } }
+        public string IdP { get { return idP; } set { idP = value; OnPropertyChanged("IdP"); } }
         public string WeightP { get { return weightP; } set { weightP = value; OnPropertyChanged("WeightP"); } }
         public string RecommendP { get { return recommendP; } set { recommendP = value; OnPropertyChanged("RecommendP"); } }
         public string HeightP { get { return heightP; } set { heightP = value; OnPropertyChanged("HeightP"); } }
@@ -118,9 +118,22 @@ namespace MonFit_Club.ViewModel
                 return sendDataCommand ??
                     (sendDataCommand = new RelayCommand(obj =>
                     {
-                        MessageBox.Show(idP + " " + weightP + " " + recommendP + " " + heightP + " " + problemsP + " " + bodytypeP);
+                        SendDataToDB(idP, weightP, heightP, problemsP, recommendP, bodytypeP);
                     }));
             }
+        }
+
+        private void SendDataToDB(string idP, string weightP, string heightP, string problemsP, string recommendP, string bodytypeP)
+        {
+            string query = string.Format(@"INSERT INTO medCard(client_id, weight, height, problems, recommend, bodytype) VALUES('{0}','{1}','{2}','{3}','{4}','{5}');", idP, weightP, heightP, problemsP, recommendP, bodytypeP);
+            NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+            DataBase.connect.Open();
+            try {
+                command.ExecuteNonQuery();
+                MessageBox.Show("Мед.Карта успешно добавлена","Сообщение");
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+            finally { DataBase.connect.Close(); }
         }
 
     }
