@@ -80,7 +80,7 @@
                                 <TextBox Text="{Binding Path=ProblemsP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="Тип телосложения"/>
                                 <TextBox Text="{Binding Path=BodyTypeP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                                <Button Margin="0,24,0,0" Content="Отправить"/>
+                                <Button Margin="0,24,0,0" Command="{Binding SendDataCommand}" Content="Отправить"/>
                             </StackPanel>
 
                         </TabItem>

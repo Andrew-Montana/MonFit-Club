@@ -118,7 +118,7 @@ namespace MonFit_Club.ViewModel
                 return sendDataCommand ??
                     (sendDataCommand = new RelayCommand(obj =>
                     {
-                        
+                        MessageBox.Show(idP + " " + weightP + " " + recommendP + " " + heightP + " " + problemsP + " " + bodytypeP);
                     }));
             }
         }
