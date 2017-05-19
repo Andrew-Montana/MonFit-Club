@@ -1,5 +1,7 @@
 ﻿using MonFit_Club.Command;
 using MonFit_Club.Models;
+using MonFit_Club.View.Doctor;
+using MonFit_Club.ViewModel.Doctor;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -23,6 +25,7 @@ namespace MonFit_Club.ViewModel
         private string problemsP;
         private string bodytypeP;
 
+        // For SendDataDB(); Data that user writes for sending command
         public string IdP { get { return idP; } set { idP = value; OnPropertyChanged("IdP"); } }
         public string WeightP { get { return weightP; } set { weightP = value; OnPropertyChanged("WeightP"); } }
         public string RecommendP { get { return recommendP; } set { recommendP = value; OnPropertyChanged("RecommendP"); } }
@@ -110,6 +113,23 @@ namespace MonFit_Club.ViewModel
         }
 
         // MVVM Command
+        private RelayCommand showRecommendCommand;
+        public RelayCommand ShowRecommendCommand
+        {
+            get
+            {
+                return showRecommendCommand ??
+                    (showRecommendCommand = new RelayCommand(obj =>
+                    {
+                        RecommendViewModel.Recommend = obj.ToString();
+                        RecommendWindow window = new RecommendWindow();
+                        window.Show();
+                    }));
+            }
+        }
+
+        //
+
         private RelayCommand sendDataCommand;
         public RelayCommand SendDataCommand
         {

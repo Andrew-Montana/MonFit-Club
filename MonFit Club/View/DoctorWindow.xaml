@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Title="Doctor" Height="260" Width="640">
-    <Border BorderBrush="#4BAD6C" BorderThickness="2">
+    <Border BorderBrush="#4BAD6C" BorderThickness="1">
         <Grid Background="#3D3C36">
             <!-- Grid 1x1 -->
             <Grid.RowDefinitions>
@@ -53,13 +53,21 @@
                         <TabItem Header="Просмотреть">
                             <StackPanel>
                                 <TextBox></TextBox>
-                                <DataGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding MedCards}">
+                                <DataGrid Name="myGrid" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding MedCards}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="ID" Binding = "{Binding Id, Mode=TwoWay}"/>
                                         <DataGridTextColumn Header="ID клиента" Binding = "{Binding Client_Id, Mode = TwoWay}"/>
                                         <DataGridTextColumn Header="Вес" Binding = "{Binding Weight, Mode = TwoWay}"/>
-                                        <DataGridTextColumn Header="Рекомендация" Binding = "{Binding Recommend, Mode = TwoWay}"/>
-                                        <DataGridTextColumn Header="Рост" Binding = "{Binding Height, Mode = TwoWay}"/>
+                                      <!--  <DataGridTextColumn Header="Рекомендация" Binding = "{Binding Recommend, Mode = TwoWay}"/> -->
+                                        <DataGridTemplateColumn Header="Рекомендация">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Command="{Binding Path=DataContext.ShowRecommendCommand, ElementName=myGrid}"  CommandParameter="{Binding Recommend}" Content="Посмотреть"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <!-- -->
+                                            <DataGridTextColumn Header="Рост" Binding = "{Binding Height, Mode = TwoWay}"/>
                                         <DataGridTextColumn Header = "Проблемы" Binding = "{Binding Problems, Mode = TwoWay}"/>
                                         <DataGridTextColumn Header = "Тип телосложения" Binding = "{Binding BodyType, Mode = TwoWay}"/>
                                     </DataGrid.Columns>
