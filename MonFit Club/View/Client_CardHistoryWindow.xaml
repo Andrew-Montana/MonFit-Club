@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Title="Client_CardHistoryWindow" Height="300" Width="500" WindowStartupLocation="CenterScreen">
-    <Border BorderBrush="#4BAD6C" BorderThickness="2">
+    <Border BorderBrush="#4BAD6C" BorderThickness="1">
         <Grid>
             <DataGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" ItemsSource="{Binding CardHistories}">
                 <DataGrid.Columns>

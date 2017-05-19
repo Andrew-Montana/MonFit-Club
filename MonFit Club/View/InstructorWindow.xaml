@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Title="Instructor" Height="260" Width="700">
-    <Border BorderBrush="#4BAD6C" BorderThickness="2">
+    <Border BorderBrush="#4BAD6C" BorderThickness="1">
         <Grid Background="#3D3C36">
             <!-- Grid 1x1 -->
             <Grid.RowDefinitions>

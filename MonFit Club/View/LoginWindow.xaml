@@ -4,7 +4,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:password="clr-namespace:MonFit_Club.Infrastructure" 
         Title="Login" Height="456" Width="325" WindowStartupLocation="CenterScreen">
-    <Border BorderBrush="#4BAD6C" BorderThickness="2">
+    <Border BorderBrush="#4BAD6C" BorderThickness="1">
         <Grid>
             <!-- Grid 4x3 -->
             <Grid.RowDefinitions>
