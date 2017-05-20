@@ -89,17 +89,24 @@ namespace MonFit_Club.ViewModel
             DataBase.connect.Open();
             try
             {
+                string _width = "";
+                string _height = "";
                 command.ExecuteNonQuery();
                 NpgsqlDataReader reader = command.ExecuteReader();
                 MedCards = new ObservableCollection<MedCard>();
                 while (reader.Read())
                 {
+                    _width = reader["weight"].ToString();
+                    _height = reader["height"].ToString();
+                    if (_width.Contains(',')) _width = _width.Replace(',', '.');
+                    if (_height.Contains(',')) _height = _height.Replace(',', '.');
+                    //
                     MedCards.Add(
                     new MedCard()
                     {
                         Recommend = reader["recommend"].ToString(),
-                        Weight = Convert.ToDouble(reader["weight"].ToString()),
-                        Height = Convert.ToDouble(reader["height"].ToString()),
+                        Weight = _width,
+                        Height = _height,
                         Problems = reader["problems"].ToString(),
                         BodyType = reader["bodytype"].ToString()
                     }

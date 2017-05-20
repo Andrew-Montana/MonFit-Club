@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace MonFit_Club.ViewModel
 {
@@ -85,17 +86,24 @@ namespace MonFit_Club.ViewModel
             DataBase.connect.Open();
             try
             {
+                string _width = "";
+                string _height = "";
                 command.ExecuteNonQuery();
                 NpgsqlDataReader reader = command.ExecuteReader();
                 MedCards = new ObservableCollection<MedCard>();
                 while (reader.Read())
                 {
+                    _width = reader["weight"].ToString();
+                    _height = reader["height"].ToString();
+                    if (_width.Contains(',')) _width = _width.Replace(',', '.');
+                    if (_height.Contains(',')) _height = _height.Replace(',', '.');
+                    //
                     MedCards.Add(
                     new MedCard() {
                         BodyType = reader["bodytype"].ToString(),
                         Problems = reader["problems"].ToString(),
-                        Weight = Convert.ToDouble(reader["weight"].ToString()),
-                        Height = Convert.ToDouble(reader["height"].ToString()),
+                        Weight = _width,
+                        Height = _height,
                         Client_Id = Convert.ToInt32(reader["client_id"].ToString()),
                         Id = Convert.ToInt32(reader["id"].ToString()),
                         Recommend = reader["recommend"].ToString()
@@ -159,7 +167,12 @@ namespace MonFit_Club.ViewModel
                 return sendDataCommand ??
                     (sendDataCommand = new RelayCommand(obj =>
                     {
-                        SendDataToDB(idP, weightP, heightP, problemsP, recommendP, bodytypeP);
+                        if (idP != null && weightP != null && heightP != null && problemsP != null && recommendP != null && bodytypeP != null)
+                        { SendDataToDB(idP, weightP, heightP, problemsP, recommendP, bodytypeP);}
+                        else
+                        {
+                            MessageBox.Show("Заполнены не все поля","Ошибка!");
+                        }
                     }));
             }
         }

@@ -21,7 +21,7 @@ namespace MonFit_Club.View.Doctor
     /// </summary>
     public partial class EditWindow
     {
-        public EditWindow(int id, int client_id, double weight, string recommend, double height, string problems, string bodytype)
+        public EditWindow(int id, int client_id, string weight, string recommend, string height, string problems, string bodytype)
         {
             InitializeComponent();
             DataContext = new EditViewModel(id, client_id, weight, recommend, height, problems, bodytype);

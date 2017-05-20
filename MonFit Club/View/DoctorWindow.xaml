@@ -63,9 +63,9 @@
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
-                                        <DataGridTextColumn Header="ID" Binding = "{Binding Id, Mode=TwoWay}"/>
-                                        <DataGridTextColumn Header="ID клиента" Binding = "{Binding Client_Id, Mode = TwoWay}"/>
-                                        <DataGridTextColumn Header="Вес" Binding = "{Binding Weight, Mode = TwoWay}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header="ID" Binding = "{Binding Id, Mode=TwoWay}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header="ID клиента" Binding = "{Binding Client_Id, Mode = TwoWay}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header="Вес" Binding = "{Binding Weight, Mode = TwoWay}"/>
                                       <!--  <DataGridTextColumn Header="Рекомендация" Binding = "{Binding Recommend, Mode = TwoWay}"/> -->
                                         <DataGridTemplateColumn Header="Рекомендация">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -75,9 +75,9 @@
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
                                         <!-- -->
-                                            <DataGridTextColumn Header="Рост" Binding = "{Binding Height, Mode = TwoWay}"/>
-                                        <DataGridTextColumn Header = "Проблемы" Binding = "{Binding Problems, Mode = TwoWay}"/>
-                                        <DataGridTextColumn Header = "Тип телосложения" Binding = "{Binding BodyType, Mode = TwoWay}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header="Рост" Binding = "{Binding Height, Mode = TwoWay}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header = "Проблемы" Binding = "{Binding Problems, Mode = TwoWay}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header = "Тип телосложения" Binding = "{Binding BodyType, Mode = TwoWay}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>

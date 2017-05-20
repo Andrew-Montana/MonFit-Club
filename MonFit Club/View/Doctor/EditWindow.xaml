@@ -5,9 +5,9 @@
         Title="Изменить" Height="410" Width="300" WindowStartupLocation="CenterScreen">
     <Border BorderBrush="#4BAD6C" BorderThickness="1">
         <Grid>
-            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding MedCard_property}">
+            <StackPanel Name="myStackPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding MedCard_property}">
                 <Label Content="ID клиента"/>
-                <TextBox Text="{Binding Path=Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Text="{Binding Path=Client_Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <Label Content="Вес"/>
                 <TextBox Text="{Binding Path=Weight,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <Label Content="Рекомендация"/>
@@ -18,7 +18,7 @@
                 <TextBox Text="{Binding Path=Problems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <Label Content="Тип телосложения"/>
                 <TextBox Text="{Binding Path=BodyType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <!--   <Button Margin="0,24,0,0" Command="{Binding SendDataCommand}" Content="Отправить"/> -->
+                <Button Margin="0,24,0,0" Command="{Binding UpdateDataCommand}" Content="Отправить"/>
             </StackPanel>
         </Grid>
     </Border>
