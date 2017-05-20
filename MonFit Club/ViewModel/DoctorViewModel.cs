@@ -12,11 +12,15 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MonFit_Club.ViewModel
 {
     class DoctorViewModel : INotifyPropertyChanged
     {
+        // CellInfo. For getting index of the row in Просмотр
+        private int itemindex;
+        public int ItemIndex { get { return itemindex; } set { itemindex = value; OnPropertyChanged("ItemIndex");} }
         //parametrs for sending to database
         private string idP;
         private string weightP;
@@ -112,7 +116,24 @@ namespace MonFit_Club.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
-        // MVVM Command
+        // MVVM Command 
+
+        private RelayCommand showEditWindowCommand;
+        public RelayCommand ShowEditWindowCommand
+        {
+            get
+            {
+                return showEditWindowCommand ??
+                    (showEditWindowCommand = new RelayCommand(obj =>
+                    {
+                        EditWindow window = new EditWindow(MedCards[ItemIndex].Id, MedCards[ItemIndex].Client_Id, MedCards[ItemIndex].Weight, MedCards[ItemIndex].Recommend, MedCards[ItemIndex].Height, MedCards[ItemIndex].Problems, MedCards[ItemIndex].BodyType);
+                        window.Show();
+                    }));
+            }
+        }
+
+        //
+
         private RelayCommand showRecommendCommand;
         public RelayCommand ShowRecommendCommand
         {

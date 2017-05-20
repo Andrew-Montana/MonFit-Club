@@ -82,6 +82,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Doctor\EditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Doctor\RecommendWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -104,6 +108,7 @@
     <Compile Include="ViewModel\ClientViewModel.cs" />
     <Compile Include="ViewModel\Client_CardHistoryViewModel.cs" />
     <Compile Include="ViewModel\DoctorViewModel.cs" />
+    <Compile Include="ViewModel\Doctor\EditViewModel.cs" />
     <Compile Include="ViewModel\Doctor\RecommendViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="View\ClientWindow.xaml.cs">
@@ -114,6 +119,9 @@
     </Compile>
     <Compile Include="View\DoctorWindow.xaml.cs">
       <DependentUpon>DoctorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\EditWindow.xaml.cs">
+      <DependentUpon>EditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doctor\RecommendWindow.xaml.cs">
       <DependentUpon>RecommendWindow.xaml</DependentUpon>
@@ -165,6 +173,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

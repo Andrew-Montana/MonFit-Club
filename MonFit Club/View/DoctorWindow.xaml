@@ -52,9 +52,17 @@
                     <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Top">
                         <TabItem Header="Просмотреть">
                             <StackPanel>
-                                <TextBox></TextBox>
-                                <DataGrid Name="myGrid" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding MedCards}">
+                                <DataGrid Name="myGrid" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding MedCards}" SelectedIndex="{Binding ItemIndex, Mode=TwoWay}">
                                     <DataGrid.Columns>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Command="{Binding Path=DataContext.ShowEditWindowCommand, ElementName=myGrid}">
+                                                        <Image Width="16" Height="16" Source="pack://siteoforigin:,,,/Resources/edit.png"></Image>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                         <DataGridTextColumn Header="ID" Binding = "{Binding Id, Mode=TwoWay}"/>
                                         <DataGridTextColumn Header="ID клиента" Binding = "{Binding Client_Id, Mode = TwoWay}"/>
                                         <DataGridTextColumn Header="Вес" Binding = "{Binding Weight, Mode = TwoWay}"/>
@@ -92,7 +100,6 @@
                             </StackPanel>
 
                         </TabItem>
-                        <TabItem Header="Изменить"></TabItem>
                     </TabControl>
                     
                 </TabItem>
