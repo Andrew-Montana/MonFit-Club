@@ -168,6 +168,41 @@ namespace MonFit_Club.ViewModel
         }
 
         // MVVM Command 
+        // 
+        private RelayCommand schedule_SendDataCommand;
+        public RelayCommand Schedule_SendDataCommand
+        {
+            get
+            {
+                return schedule_SendDataCommand ??
+                    (schedule_SendDataCommand = new RelayCommand(obj =>
+                    {
+                        if (_Date_Visit != null && _Time_Visit != null && _Client_Id_List != null  && _Visit_Type != null)
+                        { schedule_SendDataToDB(Employee_Id, _Date_Visit, _Time_Visit, _Visit_Type, _Client_Id_List ); }
+                        else
+                        {
+                            MessageBox.Show("Заполнены не все поля", "Ошибка!");
+                        }
+                    }));
+            }
+        }
+
+        private void schedule_SendDataToDB(int _empid, string _date, string _time, string _visit, string _client_list)
+        {
+            _client_list = "{" + _client_list + "}";
+            string query = string.Format(@"INSERT INTO schedule(employee_id, date_visit, time_visit, visit_type, client_id_list) VALUES('{0}','{1}','{2}','{3}','{4}');", _empid, _date, _time, _visit, _client_list);
+            NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+            DataBase.connect.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+                MessageBox.Show("День успешно назначен", "Сообщение");
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+            finally { DataBase.connect.Close(); }
+        }
+
+        // #######
 
         private RelayCommand showEditWindowCommand;
         public RelayCommand ShowEditWindowCommand

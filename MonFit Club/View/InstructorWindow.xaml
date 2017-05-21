@@ -112,15 +112,15 @@
                         </TabItem>
                         <TabItem Header="Назначить">
                             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Label Content="День Визита"/>
+                            <Label Content="Дата Визита"/>
                                 <TextBox Text="{Binding Path=_Date_Visit,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <Label Content="Время"/>
                                 <TextBox Text="{Binding Path=_Time_Visit,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                <Label Content="Клиент или Клиенты (ID)"/>
+                                <Label Content="Клиент или Клиенты (ID через запятую)"/>
                                 <TextBox Text="{Binding Path=_Client_Id_List,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 <Label Content="Заметка"/>
                                 <TextBox Text="{Binding Path=_Visit_Type,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                <Button Margin="0,24,0,0" Content="Отправить"/>
+                                <Button Margin="0,24,0,0" Command="{Binding Schedule_SendDataCommand}" Content="Отправить"/>
                             </StackPanel>
                         </TabItem>
                     </TabControl>
