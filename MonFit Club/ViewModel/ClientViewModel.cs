@@ -2,7 +2,9 @@
 using MonFit_Club.Models;
 using MonFit_Club.View;
 using MonFit_Club.View.Client;
+using MonFit_Club.ViewModel.Client;
 using MonFit_Club.ViewModel.Doctor;
+using MonFit_Club.ViewModel.Instructor;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -18,16 +20,20 @@ namespace MonFit_Club.ViewModel
 {
     class ClientViewModel : INotifyPropertyChanged
     {
+
         static private int client_id;
-        public ObservableCollection<Client> Person { get; set; }
+        public ObservableCollection<MonFit_Club.Models.Client> Person { get; set; }
         public ObservableCollection<Schedule> Schedules { get; set; }
         public ObservableCollection<MedCard> MedCards { get; set; }
+        public ObservableCollection<ClientProgrammViewModel> ClientProgramm { get; set; }
 
         static public int Client_Id { get { return client_id; } set { client_id = value; } }
 
         // Конструктор
         public ClientViewModel()
         {
+
+            // medcard
             string full_name = "", gender = "", phone_number = "", card_type = "", card_period_begin = "", card_begin_end = "", password = "";
 
            // NpgsqlConnection connect = new NpgsqlConnection() { ConnectionString = DataBase.connect_params };
@@ -50,9 +56,9 @@ namespace MonFit_Club.ViewModel
                     password = reader["password"].ToString();
                 }
                 reader.Close();
-                Person = new ObservableCollection<Client>
+                Person = new ObservableCollection<MonFit_Club.Models.Client>
                 {
-                     new Client { Id = client_id, Phone_Number = phone_number, Password = password, Gender = gender, Full_Name = full_name, Card_Type = card_type, Card_Period = card_period_begin + " - " + card_begin_end}
+                     new MonFit_Club.Models.Client { Id = client_id, Phone_Number = phone_number, Password = password, Gender = gender, Full_Name = full_name, Card_Type = card_type, Card_Period = card_period_begin + " - " + card_begin_end}
                 };
   
             }
@@ -118,6 +124,35 @@ namespace MonFit_Club.ViewModel
             }
             catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
             finally { DataBase.connect.Close(); }
+
+
+            // # Programm
+            query = string.Format(@"SELECT tr.date_created, tr.programm, tr.train_type, e.full_name as inst_full_name FROM trainRoutine tr, employee e WHERE tr.client_id = {0} AND tr.employee_id = e.id;", Client_Id);
+            command = new NpgsqlCommand(query, DataBase.connect);
+            DataBase.connect.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+                NpgsqlDataReader reader = command.ExecuteReader();
+                ClientProgramm = new ObservableCollection<ClientProgrammViewModel>();
+                while (reader.Read())
+                {
+                    ClientProgramm.Add(
+                    new ClientProgrammViewModel()
+                    {
+                        Date_Created = reader["date_created"].ToString(),
+                        Programm = reader["programm"].ToString(),
+                        Train_Type = reader["train_type"].ToString(),
+                        Instuctor_FullName = reader["inst_full_name"].ToString()
+                    }
+                      );
+                }
+                reader.Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+            finally { DataBase.connect.Close(); }
+
+            // ####
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -161,6 +196,23 @@ namespace MonFit_Club.ViewModel
                     }));
             }
         }
+
+        // programm command
+        private RelayCommand client_ShowProgrammCommand;
+        public RelayCommand Client_ShowProgrammCommand
+        {
+            get
+            {
+                return client_ShowProgrammCommand ??
+                    (client_ShowProgrammCommand = new RelayCommand(obj =>
+                    {
+                        ProgrammViewModel.Programm = obj.ToString();
+                        ClientProgrammWindow client_pwindow = new ClientProgrammWindow();
+                        client_pwindow.Show();
+                    }));
+            }
+        }
+
 
         //
 

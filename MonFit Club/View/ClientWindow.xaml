@@ -57,7 +57,23 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-                <TabItem Header="Ваша программа" Background="#3D3C36"></TabItem>
+                <TabItem Header="Ваша программа" Background="#3D3C36">
+                    <DataGrid Name="myGrid2" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding ClientProgramm}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Инструктор" Binding = "{Binding Instuctor_FullName, Mode = TwoWay}"/>
+                            <DataGridTemplateColumn Header="Программа">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding Path=DataContext.Client_ShowProgrammCommand, ElementName=myGrid2}"  CommandParameter="{Binding Programm}" Content="Посмотреть"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!-- -->
+                            <DataGridTextColumn IsReadOnly="True" Header="Тип тренинга" Binding = "{Binding Train_Type, Mode = TwoWay}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header = "Дата создания" Binding = "{Binding Date_Created, Mode = TwoWay}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
                 <TabItem Header="Ваша мед.карта" Background="#3D3C36">
                     <DataGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" ItemsSource="{Binding MedCards}">
                         <DataGrid.Columns>

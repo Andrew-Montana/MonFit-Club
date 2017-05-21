@@ -74,6 +74,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Client\ClientProgrammWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Client\ClientRecommend.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,6 +122,7 @@
     <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="DataBase.cs" />
     <Compile Include="ViewModel\ClientViewModel.cs" />
+    <Compile Include="ViewModel\Client_folder\ClientProgrammViewModel.cs" />
     <Compile Include="ViewModel\Client_CardHistoryViewModel.cs" />
     <Compile Include="ViewModel\DoctorViewModel.cs" />
     <Compile Include="ViewModel\Doctor\EditViewModel.cs" />
@@ -128,6 +133,9 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="View\ClientWindow.xaml.cs">
       <DependentUpon>ClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Client\ClientProgrammWindow.xaml.cs">
+      <DependentUpon>ClientProgrammWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Client\ClientRecommend.xaml.cs">
       <DependentUpon>ClientRecommend.xaml</DependentUpon>
