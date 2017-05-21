@@ -87,15 +87,15 @@ namespace MonFit_Club.Models
 
         // Update DB
         private RelayCommand updateDataCommand;
-        public RelayCommand UpdateDataCommand
+        public RelayCommand Inst_UpdateDataCommand
         {
             get
             {
                 return updateDataCommand ??
                     (updateDataCommand = new RelayCommand(obj =>
                     {
-                        if (Convert.ToString(Client_Id) != null && Convert.ToString(Weight) != null && Convert.ToString(Height) != null && Problems != null && Recommend != null && BodyType != null)
-                        { UpdateDataToDB(Client_Id, Weight, Height, Problems, Recommend, BodyType, Id); }
+                        if (Convert.ToString(Client_Id) != null && Convert.ToString(Id) != null && Convert.ToString(Employee_Id) != null && Programm != null && Train_Type != null && Date_Created != null)
+                        { Inst_UpdateDataToDB(Id, Client_Id, Employee_Id, Programm, Train_Type, Date_Created); }
                         else
                         {
                             MessageBox.Show("Заполнены не все поля", "Ошибка!");
@@ -104,28 +104,16 @@ namespace MonFit_Club.Models
             }
         }
 
-        private void UpdateDataToDB(int p1, string p2, string p3, string p4, string p5, string p6, int p7)
+        private void Inst_UpdateDataToDB(int pid, int pclient_id, int pemployee_id, string pprogramm, string ptrain_type, string pdate_created)
         {
-            var _width = p2.ToString();
-            var _height = p3.ToString();
-            if (_width.Contains(','))
-            {
-                _width.Replace(',', '.');
-                _width = _width.Replace(',', '.');
-            }
-            if (_height.Contains(','))
-            {
-                _height.Replace(',', '.');
-                _height = _width.Replace(',', '.');
-            }
 
-            string query = string.Format(@"UPDATE medCard SET weight = {0}, height = {1}, problems = '{2}', recommend = '{3}', bodytype = '{4}' WHERE client_id = {5} AND id = {6};", _width, _height, p4, p5, p6, p1, p7);
+            string query = string.Format(@"UPDATE trainRoutine tr SET tr.client_id = {0}, tr.programm = '{1}', tr.train_type = '{2}', tr.date_created = '{3}' FROM employee e WHERE tr.id = {4} AND e.id = {5};", pclient_id, pprogramm, ptrain_type, pdate_created, pid, pemployee_id);
             NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
             DataBase.connect.Open();
             try
             {
                 command.ExecuteNonQuery();
-                MessageBox.Show("Мед.Карта успешно обновлена", "Сообщение");
+                MessageBox.Show("Программа тренировок успешно обновлена", "Сообщение");
             }
             catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
             finally { DataBase.connect.Close(); }
