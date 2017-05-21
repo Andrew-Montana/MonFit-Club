@@ -74,6 +74,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Client\ClientRecommend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Client_CardHistoryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +128,9 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="View\ClientWindow.xaml.cs">
       <DependentUpon>ClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Client\ClientRecommend.xaml.cs">
+      <DependentUpon>ClientRecommend.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Client_CardHistoryWindow.xaml.cs">
       <DependentUpon>Client_CardHistoryWindow.xaml</DependentUpon>

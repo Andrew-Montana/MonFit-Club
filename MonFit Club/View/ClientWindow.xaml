@@ -48,7 +48,7 @@
                 </Grid>
             </TabItem>
                 <TabItem Header="Расписание" Background="#3D3C36">
-                    <DataGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" ItemsSource="{Binding Schedules}">
+                    <DataGrid Name="myGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" ItemsSource="{Binding Schedules}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="День Визита" Binding="{Binding Date_Visit, Mode=TwoWay}"/>
                             <DataGridTextColumn Header="Время" Binding="{Binding Time_Visit, Mode=TwoWay}"/>
@@ -61,7 +61,13 @@
                 <TabItem Header="Ваша мед.карта" Background="#3D3C36">
                     <DataGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" ItemsSource="{Binding MedCards}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Рекомендации" Binding="{Binding Recommend, Mode=TwoWay}"/>
+                            <DataGridTemplateColumn Header="Рекомендация">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding Path=DataContext.ShowRecommendCommand, ElementName=myGrid}"  CommandParameter="{Binding Recommend}" Content="Посмотреть"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTextColumn Header="Вес" Binding="{Binding Weight, Mode=TwoWay}"/>
                             <DataGridTextColumn Header="Рост" Binding="{Binding Height, Mode=TwoWay}"/>
                             <DataGridTextColumn Header="Тип телосложения" Binding="{Binding BodyType, Mode=TwoWay}"/>

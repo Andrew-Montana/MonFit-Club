@@ -1,6 +1,8 @@
 ﻿using MonFit_Club.Command;
 using MonFit_Club.Models;
 using MonFit_Club.View;
+using MonFit_Club.View.Client;
+using MonFit_Club.ViewModel.Doctor;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -140,6 +142,29 @@ namespace MonFit_Club.ViewModel
                     }));
             }
         }
+
+        // Recommend window
+
+        //
+
+        private RelayCommand showRecommendCommand;
+        public RelayCommand ShowRecommendCommand
+        {
+            get
+            {
+                return showRecommendCommand ??
+                    (showRecommendCommand = new RelayCommand(obj =>
+                    {
+                        RecommendViewModel.Recommend = obj.ToString();
+                        ClientRecommend window = new ClientRecommend();
+                        window.Show();
+                    }));
+            }
+        }
+
+        //
+
+
 
     }
 }

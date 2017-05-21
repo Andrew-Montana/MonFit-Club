@@ -1,0 +1,12 @@
+﻿<Controls:MetroWindow x:Class="MonFit_Club.View.Client.ClientRecommend"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Рекомендация" Height="300" Width="240" WindowStartupLocation="CenterScreen">
+    <Border BorderBrush="#4BAD6C" BorderThickness="1">
+        <Grid>
+
+            <TextBlock TextWrapping="Wrap"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Recommend, Mode=TwoWay}"></TextBlock>
+        </Grid>
+    </Border>
+</Controls:MetroWindow>
