@@ -17,6 +17,18 @@ namespace MonFit_Club.ViewModel
 {
     class InstructorViewModel : INotifyPropertyChanged
     {
+        // Расписание
+        private string _date_visit;
+        private string _client_id_list;
+        private string _time_visit;
+        private string _visit_type;
+
+        public string _Date_Visit { get { return _date_visit; } set { _date_visit = value; OnPropertyChanged("_Date_Visit"); } }
+        public string _Client_Id_List { get { return _client_id_list; } set { _client_id_list = value; OnPropertyChanged("_Client_Id_List"); } }
+        public string _Time_Visit { get { return _time_visit; } set { _time_visit = value; OnPropertyChanged("_Time_Visit"); } }
+        public string _Visit_Type { get { return _visit_type; } set { _visit_type = value; OnPropertyChanged("_Visit_Type"); } }
+
+
         // InsertData fields and properties
         private string _client_id; private string _programm;
         private string _train_type; private string _date_created;
