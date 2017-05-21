@@ -99,6 +99,8 @@
                     </TabControl>
                 </TabItem>
                 <TabItem Header="Расписание" Background="#3D3C36">
+                    <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Top">
+                        <TabItem Header ="Просмотр">
                     <DataGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" ItemsSource="{Binding Schedules}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="День Визита" Binding="{Binding Date_Visit, Mode=TwoWay}"/>
@@ -107,6 +109,21 @@
                             <DataGridTextColumn Header="Заметка" Binding="{Binding Visit_Type, Mode=TwoWay}"/>
                         </DataGrid.Columns>
                     </DataGrid>
+                        </TabItem>
+                        <TabItem Header="Назначить">
+                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Label Content="День Визита"/>
+                                <TextBox Text="{Binding Path=_Date_Visit,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Content="Время"/>
+                                <TextBox Text="{Binding Path=_Time_Visit,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <Label Content="Клиент или Клиенты (ID)"/>
+                                <TextBox Text="{Binding Path=_Client_Id_List,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <Label Content="Заметка"/>
+                                <TextBox Text="{Binding Path=_Visit_Type,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <Button Margin="0,24,0,0" Content="Отправить"/>
+                            </StackPanel>
+                        </TabItem>
+                    </TabControl>
                 </TabItem>
 
             </TabControl>
