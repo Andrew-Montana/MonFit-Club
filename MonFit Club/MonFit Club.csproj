@@ -94,6 +94,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Instructor\Inst_EditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Instructor\ProgrammWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -111,6 +119,8 @@
     <Compile Include="ViewModel\Doctor\EditViewModel.cs" />
     <Compile Include="ViewModel\Doctor\RecommendViewModel.cs" />
     <Compile Include="ViewModel\InstructorViewModel.cs" />
+    <Compile Include="ViewModel\Instructor\Inst_EditViewModel.cs" />
+    <Compile Include="ViewModel\Instructor\ProgrammViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="View\ClientWindow.xaml.cs">
       <DependentUpon>ClientWindow.xaml</DependentUpon>
@@ -129,6 +139,12 @@
     </Compile>
     <Compile Include="View\InstructorWindow.xaml.cs">
       <DependentUpon>InstructorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Instructor\Inst_EditWindow.xaml.cs">
+      <DependentUpon>Inst_EditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Instructor\ProgrammWindow.xaml.cs">
+      <DependentUpon>ProgrammWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>

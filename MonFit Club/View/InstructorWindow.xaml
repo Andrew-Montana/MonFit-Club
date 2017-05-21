@@ -49,7 +49,52 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Программы тренировок" Background="#3D3C36">
-                    
+                    <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Top">
+                        <TabItem Header="Просмотреть">
+                            <StackPanel>
+                                <DataGrid Name="myGrid" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding trainRoutines}" SelectedIndex="{Binding ItemIndex, Mode=TwoWay}">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Command="{Binding Path=DataContext.inst_ShowEditWindowCommand, ElementName=myGrid}">
+                                                        <Image Width="16" Height="16" Source="pack://siteoforigin:,,,/Resources/edit.png"></Image>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn IsReadOnly="True" Header="ID" Binding = "{Binding Id, Mode=TwoWay}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header="ID клиента" Binding = "{Binding Client_Id, Mode = TwoWay}"/>
+                                        <!--  <DataGridTextColumn Header="Программа" Binding = "{Binding Programm, Mode = TwoWay}"/> -->
+                                        <DataGridTemplateColumn Header="Программа">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Command="{Binding Path=DataContext.ShowProgrammCommand, ElementName=myGrid}"  CommandParameter="{Binding Programm}" Content="Посмотреть"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <!-- -->
+                                        <DataGridTextColumn IsReadOnly="True" Header="Тип тренинга" Binding = "{Binding Train_Type, Mode = TwoWay}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header = "Дата создания" Binding = "{Binding Date_Created, Mode = TwoWay}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </TabItem>
+                        <TabItem Header="Добавить">
+                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding AddProgrammColl}">
+                                <Label Content="ID клиента"/>
+                                <TextBox Text="{Binding Path=Client_Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="ID инструктора"/>
+                                <TextBox IsReadOnly ="true" Text="{Binding Path=Employee_Id,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="Тип тренинга"/>
+                                <TextBox Text="{Binding Path=Train_Type,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="Дата создания"/>
+                                <TextBox Text="{Binding Path=Date_Created, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Button Margin="0,24,0,0" Command="{Binding InsertDataCommand}" Content="Отправить"/>
+                            </StackPanel>
+
+                        </TabItem>
+                    </TabControl>
                 </TabItem>
                 <TabItem Header="Расписание" Background="#3D3C36"></TabItem>
 
