@@ -116,8 +116,11 @@ namespace MonFit_Club.ViewModel
                 {
                     if (position.Contains("Инструктор"))
                     {
-                        MessageBox.Show("Окно инструктора не готово");
-                        // а вообще, передать параметры в свойства класса.
+                        int x;
+                        x = Convert.ToInt32(id);
+                        InstructorViewModel.Employee_Id = x;
+                        InstructorWindow instWindow = new InstructorWindow();
+                        instWindow.Show();
                     }
                     if (position == "Врач")
                     {

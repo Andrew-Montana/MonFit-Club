@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using MonFit_Club.ViewModel;
 
 namespace MonFit_Club.View
 {
@@ -23,6 +24,7 @@ namespace MonFit_Club.View
         public InstructorWindow()
         {
             InitializeComponent();
+            DataContext = new InstructorViewModel();
         }
     }
 }

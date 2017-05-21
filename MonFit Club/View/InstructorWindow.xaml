@@ -34,18 +34,23 @@
                             <Label Content="Должность" HorizontalAlignment="Right"></Label>
                             <Label Content="Зарплата" HorizontalAlignment="Right"></Label>
                         </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.Column="1">
+                        <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding employees}">
                             <!-- Labels Right Side. Binding -->
-                            <Label></Label>
-                            <Label></Label>
-                            <Label></Label>
-                            <Label></Label>
+                            <Label Content="{Binding Id, Mode=TwoWay}"></Label>
+                            <Label Content="{Binding Full_Name, Mode=TwoWay}"></Label>
+                            <Label Content="{Binding Position, Mode=TwoWay}"></Label>
+                            <TextBlock Margin="6,6,0,0">
+                                <Run Text="{Binding Salary, Mode=TwoWay}"/>
+                                <Run Text="$"/>
+                            </TextBlock>
                         </StackPanel>
                         <!-- stackPanels end-->
                        <!-- Something else to add in last row. Later-->
                     </Grid>
                 </TabItem>
-                <TabItem Header="Программы тренировок" Background="#3D3C36"></TabItem>
+                <TabItem Header="Программы тренировок" Background="#3D3C36">
+                    
+                </TabItem>
                 <TabItem Header="Расписание" Background="#3D3C36"></TabItem>
 
             </TabControl>

@@ -36,11 +36,11 @@
                         </StackPanel>
                         <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding Person}">
                             <!-- Labels Right Side. Binding -->
-                            <Label Content="{Binding Id}"></Label>
-                            <Label Content="{Binding Full_Name}"></Label>
-                            <Label Content="{Binding Position}"></Label>
+                            <Label Content="{Binding Id, Mode=TwoWay}"></Label>
+                            <Label Content="{Binding Full_Name, Mode=TwoWay}"></Label>
+                            <Label Content="{Binding Position, Mode=TwoWay}"></Label>
                             <TextBlock Margin="6,6,0,0">
-                                <Run Text="{Binding Salary}"/>
+                                <Run Text="{Binding Salary, Mode=TwoWay}"/>
                                 <Run Text="$"/>
                             </TextBlock>
                         </StackPanel>

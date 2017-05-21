@@ -5,6 +5,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using Npgsql;
+using System.Windows;
 
 namespace MonFit_Club.Models
 {
@@ -18,6 +21,8 @@ namespace MonFit_Club.Models
         private string gender;
         private double salary;
         private string password;
+
+        #region properties
 
         public int Id
         {
@@ -98,6 +103,48 @@ namespace MonFit_Club.Models
                 OnPropertyChanged("Password");
             }
         }
+
+        #endregion
+
+        //
+        public ObservableCollection<Employee> GetEmployee(int employee_id, ObservableCollection<Employee> collection)
+        {
+            string full_name = "", position = "", phone_number = "", experience_start = "", gender = "", password = "";
+            double salary = 0;
+
+            string query = string.Format(@"SELECT * FROM employee WHERE id = {0};", employee_id);
+
+            NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+            DataBase.connect.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+                NpgsqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    full_name = reader["full_name"].ToString();
+                    gender = reader["gender"].ToString();
+                    phone_number = reader["phone_number"].ToString();
+                    position = reader["position"].ToString();
+                    experience_start = reader["experience_start"].ToString();
+                    salary = Convert.ToDouble(reader["salary"].ToString());
+                    password = reader["password"].ToString();
+                    //
+                    collection.Add(
+                        new Employee() { Experience_Start = experience_start, Full_Name = full_name, Gender = gender, Id = employee_id, Password = password, Phone_Number = phone_number, Position = position, Salary = salary }
+                        );
+                }
+                reader.Close();
+                return collection;
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); return null; }
+            finally { DataBase.connect.Close(); }
+        }
+
+        // refresh collection
+        // insert data
+        // update data
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
