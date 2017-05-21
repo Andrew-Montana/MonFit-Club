@@ -2,6 +2,7 @@
 using MonFit_Club.Models;
 using MonFit_Club.View.Instructor;
 using MonFit_Club.ViewModel.Instructor;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,11 +11,22 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MonFit_Club.ViewModel
 {
     class InstructorViewModel : INotifyPropertyChanged
     {
+        // InsertData fields and properties
+        private string _client_id; private string _programm;
+        private string _train_type; private string _date_created;
+
+        public string _Client_id { get { return _client_id; } set { _client_id = value; OnPropertyChanged("_Client_id"); } }
+        public string _Programm { get { return _programm; } set { _programm = value; OnPropertyChanged("_Programm"); } }
+        public string _Train_type { get { return _train_type; } set { _train_type = value; OnPropertyChanged("_Train_type"); } }
+        public string _Date_created { get { return _date_created; } set { _date_created = value; OnPropertyChanged("_Date_created"); } }
+
+
         // CellInfo. For getting index of the row in Просмотр
         private int itemindex;
         public int ItemIndex { get { return itemindex; } set { itemindex = value; OnPropertyChanged("ItemIndex"); } }
@@ -38,6 +50,8 @@ namespace MonFit_Club.ViewModel
             trainRoutines = new ObservableCollection<TrainRoutine>();
             TrainRoutine trModel = new TrainRoutine();
             trainRoutines = trModel.GetTrainRoutines(employee_id, trainRoutines);
+
+            _date_created = DateTime.Now.Year.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Day.ToString();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -78,6 +92,40 @@ namespace MonFit_Club.ViewModel
                         window.Show();
                     }));
             }
+        }
+
+        //
+
+        private RelayCommand insertDataCommand;
+        public RelayCommand InsertDataCommand
+        {
+            get
+            {
+                return insertDataCommand ??
+                    (insertDataCommand = new RelayCommand(obj =>
+                    {
+                        if (_client_id.ToString() != null && Convert.ToString(Employee_Id) != null && _programm != null && _train_type != null && _date_created != null)
+                        { SendDataToDB(_Client_id, Employee_Id, _Programm, _Train_type, _Date_created); }
+                        else
+                        {
+                            MessageBox.Show("Заполнены не все поля", "Ошибка!");
+                        }
+                    }));
+            }
+        }
+
+        private void SendDataToDB(string _client_id, int _employee_id, string _programm, string _train_type, string _date_created)
+        {
+            string query = string.Format(@"INSERT INTO trainRoutine(client_id, employee_id, programm, train_type, date_created) VALUES('{0}','{1}','{2}','{3}','{4}');", _client_id, _employee_id, _programm, _train_type, _date_created);
+            NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+            DataBase.connect.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+                MessageBox.Show("Программа тренировок успешно добавлена", "Сообщение");
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+            finally { DataBase.connect.Close(); }
         }
 
     }

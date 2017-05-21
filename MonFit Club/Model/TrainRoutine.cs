@@ -107,7 +107,7 @@ namespace MonFit_Club.Models
         private void Inst_UpdateDataToDB(int pid, int pclient_id, int pemployee_id, string pprogramm, string ptrain_type, string pdate_created)
         {
 
-            string query = string.Format(@"UPDATE trainRoutine tr SET tr.client_id = {0}, tr.programm = '{1}', tr.train_type = '{2}', tr.date_created = '{3}' FROM employee e WHERE tr.id = {4} AND e.id = {5};", pclient_id, pprogramm, ptrain_type, pdate_created, pid, pemployee_id);
+            string query = string.Format(@"UPDATE trainRoutine SET client_id = {0}, programm = '{1}', train_type = '{2}', date_created = '{3}' FROM employee e WHERE trainRoutine.id = {4} AND e.id = {5};", pclient_id, pprogramm, ptrain_type, pdate_created, pid, pemployee_id);
             NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
             DataBase.connect.Open();
             try

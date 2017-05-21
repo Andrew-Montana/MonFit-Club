@@ -12,13 +12,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 
 namespace MonFit_Club.View.Instructor
 {
     /// <summary>
     /// Interaction logic for Inst_EditWindow.xaml
     /// </summary>
-    public partial class Inst_EditWindow : Window
+    public partial class Inst_EditWindow
     {
 
         public Inst_EditWindow(int id, int client_id, int employee_id, string programm, string train_type, string date_created)

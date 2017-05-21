@@ -81,15 +81,17 @@
                             </StackPanel>
                         </TabItem>
                         <TabItem Header="Добавить">
-                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding AddProgrammColl}">
+                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <Label Content="ID клиента"/>
-                                <TextBox Text="{Binding Path=Client_Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <TextBox Text="{Binding Path=_Client_id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="ID инструктора"/>
-                                <TextBox IsReadOnly ="true" Text="{Binding Path=Employee_Id,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <TextBox IsReadOnly ="true" Text="{Binding Path=Employee_Id,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="Программа"/>
+                                <TextBox Text="{Binding Path=_Programm,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="Тип тренинга"/>
-                                <TextBox Text="{Binding Path=Train_Type,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <TextBox Text="{Binding Path=_Train_type,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="Дата создания"/>
-                                <TextBox Text="{Binding Path=Date_Created, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <TextBox IsReadOnly="True" Text="{Binding Path=_Date_created, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Button Margin="0,24,0,0" Command="{Binding InsertDataCommand}" Content="Отправить"/>
                             </StackPanel>
 
