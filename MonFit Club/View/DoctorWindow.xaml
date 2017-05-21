@@ -103,7 +103,16 @@
                     </TabControl>
                     
                 </TabItem>
-                <TabItem Header="Расписание" Background="#3D3C36"></TabItem>
+                <TabItem Header="Расписание" Background="#3D3C36">
+                    <DataGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" ItemsSource="{Binding Schedules}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="День Визита" Binding="{Binding Date_Visit, Mode=TwoWay}"/>
+                            <DataGridTextColumn Header="Время" Binding="{Binding Time_Visit, Mode=TwoWay}"/>
+                            <DataGridTextColumn Header="Клиенты" Binding="{Binding Client_Id_List, Mode=TwoWay}"/>
+                            <DataGridTextColumn Header="Заметка" Binding="{Binding Visit_Type, Mode=TwoWay}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
 
             </TabControl>
         </Grid>

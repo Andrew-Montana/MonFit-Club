@@ -43,18 +43,50 @@ namespace MonFit_Club.ViewModel
         // collections
         public ObservableCollection<Employee> Person { get; set; }
         public ObservableCollection<MedCard> MedCards { get; set; }
+        public ObservableCollection<Schedule> Schedules { get; set; }
 
         static public int Employee_Id { get { return employee_id; } set { employee_id = value; } }
 
         // constructor
         public DoctorViewModel()
         {
+            // Вкладка Расписание
+            string query = "";
+
+            query = string.Format(@"SELECT s.time_visit, s.date_visit, s.visit_type, s.client_id_list::TEXT FROM schedule s, employee e
+                                    WHERE s.employee_id = {0} AND e.id = {0};", Employee_Id);
+            NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+            DataBase.connect.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+                NpgsqlDataReader reader = command.ExecuteReader();
+                Schedules = new ObservableCollection<Schedule>();
+                while (reader.Read())
+                {
+                    Schedules.Add(
+                    new Schedule()
+                    {
+                        Date_Visit = reader["date_visit"].ToString(),
+                        Time_Visit = reader["time_visit"].ToString(),
+                        Visit_Type = reader["visit_type"].ToString(),
+                        Client_Id_List = reader["client_id_list"].ToString().Replace("{", "").Replace("}", "").ToString()
+                    }
+                      );
+                }
+                reader.Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+            finally { DataBase.connect.Close(); }
+
+
+            //
             string full_name = "", position = "", phone_number = "", experience_start = "", gender = "", password = "";
             double salary = 0;
 
-            string query = string.Format(@"SELECT * FROM employee WHERE id = {0};", employee_id);
+             query = string.Format(@"SELECT * FROM employee WHERE id = {0};", employee_id);
 
-            NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+             command = new NpgsqlCommand(query, DataBase.connect);
             DataBase.connect.Open();
             try
             {

@@ -38,11 +38,43 @@ namespace MonFit_Club.ViewModel
         public ObservableCollection<Employee> employees { get; set; }
         public ObservableCollection<TrainRoutine> trainRoutines { get; set; }
         public ObservableCollection<TrainRoutine> AddProgrammColl { get; set; }
+        public ObservableCollection<Schedule> Schedules { get; set; }
 
 
 
         public InstructorViewModel()
         {
+            // Вкладка Расписание
+            string query = "";
+
+            query = string.Format(@"SELECT s.time_visit, s.date_visit, s.visit_type, s.client_id_list::TEXT FROM schedule s, employee e
+                                    WHERE s.employee_id = {0} AND e.id = {0};", Employee_Id);
+            NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+            DataBase.connect.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+                NpgsqlDataReader reader = command.ExecuteReader();
+                Schedules = new ObservableCollection<Schedule>();
+                while (reader.Read())
+                {
+                    Schedules.Add(
+                    new Schedule()
+                    {
+                        Date_Visit = reader["date_visit"].ToString(),
+                        Time_Visit = reader["time_visit"].ToString(),
+                        Visit_Type = reader["visit_type"].ToString(),
+                        Client_Id_List = reader["client_id_list"].ToString().Replace("{","").Replace("}","").ToString()
+                    }
+                      );
+                }
+                reader.Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+            finally { DataBase.connect.Close(); }
+            
+            // ##
+
             Employee employeeModel = new Employee();
             employees = new ObservableCollection<Employee>();
             employees = employeeModel.GetEmployee(employee_id, employees);
