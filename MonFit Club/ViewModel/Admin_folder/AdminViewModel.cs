@@ -26,6 +26,17 @@ namespace MonFit_Club.ViewModel.Admin_folder
        public string Cl_Card_Period { get { return cl_Card_Period; } set { cl_Card_Period = value; OnPropertyChanged("Cl_Card_Period"); } }
        public string Cl_Password { get { return cl_Password; } set { cl_Password = value; OnPropertyChanged("Cl_Password"); } }
 
+        // fields for sending emp info
+       // , , , , , , Emp_Position
+       private string emp_Full_Name, emp_Gender, emp_Phone_Number, emp_Experience_Start, emp_Salary, emp_Password, emp_Position;
+       public string Emp_Full_Name { get { return emp_Full_Name; } set { emp_Full_Name = value; OnPropertyChanged("Emp_Full_Name"); } }
+       public string Emp_Gender { get { return emp_Gender; } set { emp_Gender = value; OnPropertyChanged("Emp_Gender"); } }
+       public string Emp_Phone_Number { get { return emp_Phone_Number; } set { emp_Phone_Number = value; OnPropertyChanged("Emp_Phone_Number"); } }
+       public string Emp_Experience_Start { get { return emp_Experience_Start; } set { emp_Experience_Start = value; OnPropertyChanged("Emp_Experience_Start"); } }
+       public string Emp_Salary { get { return emp_Salary; } set { emp_Salary = value; OnPropertyChanged("Emp_Salary"); } }
+       public string Emp_Password { get { return emp_Password; } set { emp_Password = value; OnPropertyChanged("Emp_Password"); } }
+       public string Emp_Position { get { return emp_Position; } set { emp_Position = value; OnPropertyChanged("Emp_Position"); } }
+        
         //employee_id
         static private int employee_id;
         static public int Employee_Id { get { return employee_id; } set { employee_id = value; } }
@@ -198,6 +209,40 @@ namespace MonFit_Club.ViewModel.Admin_folder
 
 
       
+                    }));
+            }
+        }
+
+        // ### employee insert
+        // mvvm commands
+        // SendClientDataCommand
+        private RelayCommand sendEmployeeDataCommand;
+        public RelayCommand SendEmployeeDataCommand
+        {
+            get
+            {
+                return sendEmployeeDataCommand ??
+                    (sendClientDataCommand = new RelayCommand(obj =>
+                    {
+                        if (emp_Full_Name != null && emp_Gender != null && emp_Phone_Number != null && emp_Experience_Start != null && emp_Salary != null && emp_Password != null && emp_Position != null)
+                        {
+                            // 
+                            string query = string.Format(@"INSERT into employee(full_name, gender, phone_number, experience_start, salary, password, position) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}');", Emp_Full_Name, Emp_Gender, Emp_Phone_Number, Emp_Experience_Start, emp_Salary, emp_Password, emp_Position);
+                            NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+
+                            DataBase.connect.Open();
+                            try
+                            {
+                                command.ExecuteNonQuery();
+                                MessageBox.Show("Сотрудник успешно добавлен", "Сообщение");
+                            }
+                            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+                            finally { DataBase.connect.Close(); }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Не все поля заполнены");
+                        }
                     }));
             }
         }

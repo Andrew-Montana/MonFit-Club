@@ -106,20 +106,20 @@
                         </TabItem>
                         <TabItem Header="Добавить">
                             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <Label Content="ID сотрудника"/>
-                                <TextBox Text="{Binding Path=Emp_Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="ФИО"/>
                                 <TextBox Text="{Binding Path=Emp_Full_Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="Пол"/>
                                 <TextBox Text="{Binding Path=Emp_Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="Номер телефона"/>
                                 <TextBox Text="{Binding Path=Emp_Phone_Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                                <Label Content="Стаж"/>
+                                <Label Content="Стаж (Пример: 2017-03-12)"/>
                                 <TextBox Text="{Binding Path=Emp_Experience_Start, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="Зарплата"/>
                                 <TextBox Text="{Binding Path=Emp_Salary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="Пароль"/>
-                                <TextBox Text="{Binding Path=Cl_Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <TextBox Text="{Binding Path=Emp_Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="Должность"/>
+                                <TextBox Text="{Binding Path=Emp_Position, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                                 <Button Margin="0,24,0,0" Command="{Binding SendEmployeeDataCommand}" Content="Отправить"/>
                             </StackPanel>
