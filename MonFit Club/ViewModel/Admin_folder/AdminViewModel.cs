@@ -1,4 +1,5 @@
-﻿using MonFit_Club.Models;
+﻿using MonFit_Club.Command;
+using MonFit_Club.Models;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,17 @@ namespace MonFit_Club.ViewModel.Admin_folder
 {
     class AdminViewModel : INotifyPropertyChanged
     {
+        // fields for sending client info
+
+       private string cl_Id, cl_Full_Name, cl_Gender, cl_Phone_Number, cl_Card_Type, cl_Card_Period, cl_Password;
+       public string Cl_Id { get { return cl_Id; } set { cl_Id = value; OnPropertyChanged("Cl_Id"); } }
+       public string Cl_Full_Name { get { return cl_Full_Name; } set { cl_Full_Name = value; OnPropertyChanged("Cl_Full_Name"); } }
+       public string Cl_Gender { get { return cl_Gender; } set { cl_Gender = value; OnPropertyChanged("Cl_Gender"); } }
+       public string Cl_Phone_Number { get { return cl_Phone_Number; } set { cl_Phone_Number = value; OnPropertyChanged("Cl_Phone_Number"); } }
+       public string Cl_Card_Type { get { return cl_Card_Type; } set { cl_Card_Type = value; OnPropertyChanged("Cl_Card_Type"); } }
+       public string Cl_Card_Period { get { return cl_Card_Period; } set { cl_Card_Period = value; OnPropertyChanged("Cl_Card_Period"); } }
+       public string Cl_Password { get { return cl_Password; } set { cl_Password = value; OnPropertyChanged("Cl_Password"); } }
+
         //employee_id
         static private int employee_id;
         static public int Employee_Id { get { return employee_id; } set { employee_id = value; } }
@@ -137,6 +149,57 @@ namespace MonFit_Club.ViewModel.Admin_folder
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        // mvvm commands
+        // SendClientDataCommand
+        private RelayCommand sendClientDataCommand;
+        public RelayCommand SendClientDataCommand
+        {
+            get
+            {
+                return sendClientDataCommand ??
+                    (sendClientDataCommand = new RelayCommand(obj =>
+                    {
+                        if (Cl_Card_Period.Length > 22)
+                        {
+                            if (cl_Full_Name != null && cl_Gender != null && cl_Phone_Number != null && cl_Card_Type != null && cl_Card_Period != null && cl_Password != null)
+                            {
+                                if (cl_Card_Type == "Gold" || cl_Card_Type == "Silver" || cl_Card_Type == "Bronze")
+                                {
+                                    // 
+                                    Cl_Card_Period = "{" + Cl_Card_Period + "}";
+                                    string query = string.Format(@"INSERT into client(full_name, gender, phone_number, card_type, card_period, password) values('{0}','{1}','{2}','{3}','{4}','{5}');", Cl_Full_Name, Cl_Gender, Cl_Phone_Number, Cl_Card_Type, Cl_Card_Period, Cl_Password);
+                                    NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+
+                                    DataBase.connect.Open();
+                                    try
+                                    {
+                                        command.ExecuteNonQuery();
+                                        MessageBox.Show("Клиент успешно добавлен", "Сообщение");
+                                    }
+                                    catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+                                    finally { DataBase.connect.Close(); }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Возможные варианты: Gold, Silver, Bronze");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Не все поля заполнены!");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Неправильно оформленный срок");
+                        }
+
+
+      
+                    }));
+            }
         }
 
 

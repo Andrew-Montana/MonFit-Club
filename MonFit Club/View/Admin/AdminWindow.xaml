@@ -66,17 +66,15 @@
                         </TabItem>
                         <TabItem Header="Добавить">
                             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <Label Content="ID клиента"/>
-                                <TextBox Text="{Binding Path=Cl_Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="ФИО"/>
                                 <TextBox Text="{Binding Path=Cl_Full_Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="Пол"/>
                                 <TextBox Text="{Binding Path=Cl_Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="Номер телефона"/>
                                 <TextBox Text="{Binding Path=Cl_Phone_Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                                <Label Content="Тип Карты"/>
+                                <Label Content="Тип Карты(Gold/Silver/Bronze)"/>
                                 <TextBox Text="{Binding Path=Cl_Card_Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                                <Label Content="Срок карты"/>
+                                <Label Content="Срок карты(Пример: {2017-03-01 14:00:00},{2017-06-15 21:00:00} )"/>
                                 <TextBox Text="{Binding Path=Cl_Card_Period, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                 <Label Content="Пароль"/>
                                 <TextBox Text="{Binding Path=Cl_Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
