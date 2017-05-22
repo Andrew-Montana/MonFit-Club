@@ -52,7 +52,7 @@
                     <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Top">
                         <TabItem Header="Просмотреть">
                            
-                                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding clients}" SelectedIndex="{Binding ItemIndex, Mode=TwoWay}">
+                                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding clients}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn IsReadOnly="True" Header="ID" Binding = "{Binding Id, Mode = TwoWay}"/>
                                         <DataGridTextColumn IsReadOnly="True" Header = "ФИО" Binding = "{Binding Full_Name, Mode = TwoWay}"/>
@@ -88,6 +88,48 @@
                     </TabControl>
 
                 </TabItem>
+
+                <TabItem Header="Сотрудники" Background="#3D3C36">
+                    <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Top">
+                        <TabItem Header="Просмотреть">
+
+                            <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding employees}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn IsReadOnly="True" Header="ID" Binding = "{Binding Id, Mode = TwoWay}"/>
+                                    <DataGridTextColumn IsReadOnly="True" Header = "ФИО" Binding = "{Binding Full_Name, Mode = TwoWay}"/>
+                                    <DataGridTextColumn IsReadOnly="True" Header = "Должность" Binding = "{Binding Position, Mode = TwoWay}"/>
+                                    <DataGridTextColumn IsReadOnly="True" Header = "Пол" Binding = "{Binding Gender, Mode = TwoWay}"/>
+                                    <DataGridTextColumn IsReadOnly="True" Header = "Телефон" Binding = "{Binding Phone_Number, Mode = TwoWay}"/>
+                                    <DataGridTextColumn IsReadOnly="True" Header = "Стаж" Binding = "{Binding Experience_Start, Mode = TwoWay}"/>
+                                    <DataGridTextColumn IsReadOnly="True" Header = "Зарплата" Binding = "{Binding Salary, Mode = TwoWay}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                        </TabItem>
+                        <TabItem Header="Добавить">
+                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Label Content="ID сотрудника"/>
+                                <TextBox Text="{Binding Path=Emp_Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="ФИО"/>
+                                <TextBox Text="{Binding Path=Emp_Full_Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="Пол"/>
+                                <TextBox Text="{Binding Path=Emp_Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="Номер телефона"/>
+                                <TextBox Text="{Binding Path=Emp_Phone_Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="Стаж"/>
+                                <TextBox Text="{Binding Path=Emp_Experience_Start, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="Зарплата"/>
+                                <TextBox Text="{Binding Path=Emp_Salary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="Пароль"/>
+                                <TextBox Text="{Binding Path=Cl_Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                                <Button Margin="0,24,0,0" Command="{Binding SendEmployeeDataCommand}" Content="Отправить"/>
+                            </StackPanel>
+
+                        </TabItem>
+                    </TabControl>
+                </TabItem>
+
                 <TabItem Header="Расписание" Background="#3D3C36">
 
                 </TabItem>

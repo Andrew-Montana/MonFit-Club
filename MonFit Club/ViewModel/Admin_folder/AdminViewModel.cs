@@ -20,7 +20,7 @@ namespace MonFit_Club.ViewModel.Admin_folder
 
         // collections
         public ObservableCollection<Client> clients { get; set; }
-        public ObservableCollection<Client> employees { get; set; }
+        public ObservableCollection<Employee> employees { get; set; }
         public ObservableCollection<Employee> Person { get; set; }
 
         public AdminViewModel()
@@ -86,6 +86,46 @@ namespace MonFit_Club.ViewModel.Admin_folder
                 {
                      new Employee { Experience_Start = per_experience_start, Full_Name = per_full_name, Gender = per_gender, Id = Employee_Id, Password = per_password, Phone_Number = per_phone_number, Position = per_position, Salary = per_salary}
                 };
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+            finally { DataBase.connect.Close(); }
+
+
+            // Employee ###
+            employees = new ObservableCollection<Employee>();
+            int empid = 0;
+            string empfull_name = "", empgender = "", empphone_number = "", empposition = "", empskill = "";
+            double empsalary = 0;
+
+            query = string.Format(@"select id, full_name, position, phone_number, experience_start, gender, salary from employee;");
+
+             command = new NpgsqlCommand(query, DataBase.connect);
+            DataBase.connect.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+                NpgsqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    empid = reader.GetInt32(0);
+                    empfull_name = reader["full_name"].ToString();
+                    empgender = reader["gender"].ToString();
+                    empphone_number = reader["phone_number"].ToString();
+                    empposition = reader["position"].ToString();
+                    empskill = reader["experience_start"].ToString();
+
+                    string x = reader["salary"].ToString();
+                    if (x.Contains(",")) x = x.Replace(",", "'.").ToString();
+                    empsalary = Convert.ToDouble(x);
+
+
+
+                    employees.Add(
+    new Employee() { Id = empid, Full_Name = empfull_name, Gender = empgender, Phone_Number = empphone_number, Position = empposition, Experience_Start = empskill, Salary = empsalary }
+    );
+                }
+                reader.Close();
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
