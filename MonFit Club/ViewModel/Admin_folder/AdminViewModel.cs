@@ -45,6 +45,7 @@ namespace MonFit_Club.ViewModel.Admin_folder
         public ObservableCollection<Client> clients { get; set; }
         public ObservableCollection<Employee> employees { get; set; }
         public ObservableCollection<Employee> Person { get; set; }
+        public ObservableCollection<Leave_Out> leaveouts { get; set; }
 
         public AdminViewModel()
         {
@@ -153,6 +154,30 @@ namespace MonFit_Club.ViewModel.Admin_folder
             }
             catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
             finally { DataBase.connect.Close(); }
+
+
+            // ##### leave out
+            leaveouts = new ObservableCollection<Leave_Out>();
+            query = string.Format(@"Select l.employee_id, e.full_name, l.action_datetime, l.action_type FROM leave_out l, employee e WHERE l.employee_id = e.id;");
+
+             command = new NpgsqlCommand(query, DataBase.connect);
+            DataBase.connect.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+                NpgsqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    leaveouts.Add(
+    new Leave_Out() { Full_Name = reader["full_name"].ToString(), Action_DateTime = reader["action_datetime"].ToString(), Employee_Id = Convert.ToInt32(reader["employee_id"].ToString()), Action_Type = reader["action_type"].ToString() }
+    );
+                }
+                reader.Close();
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+            finally { DataBase.connect.Close(); }
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

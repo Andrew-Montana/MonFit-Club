@@ -129,7 +129,14 @@
                 </TabItem>
 
                 <TabItem Header="Расписание" Background="#3D3C36">
-
+                    <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding leaveouts}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="ID" Binding = "{Binding Employee_Id, Mode = TwoWay}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="ФИО" Binding = "{Binding Full_Name, Mode = TwoWay}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Дата" Binding = "{Binding Action_DateTime, Mode = TwoWay}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Действие" Binding = "{Binding Action_Type, Mode = TwoWay}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
 
             </TabControl>

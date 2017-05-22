@@ -15,6 +15,17 @@ namespace MonFit_Club.Models
         private string action_datetime;
         private string action_type;
         private string precedent;
+        private string full_name;
+
+        public string Full_Name
+        {
+            get { return full_name; }
+            set
+            {
+                full_name = value;
+                OnPropertyChanged("Full_Name");
+            }
+        }
 
         public int Employee_Id
         {
