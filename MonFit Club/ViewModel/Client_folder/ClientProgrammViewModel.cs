@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MonFit_Club.ViewModel.Client
+namespace MonFit_Club.ViewModel.Client_folder
 {
     class ClientProgrammViewModel : INotifyPropertyChanged
     {

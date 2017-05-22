@@ -2,7 +2,7 @@
 using MonFit_Club.Models;
 using MonFit_Club.View;
 using MonFit_Club.View.Client;
-using MonFit_Club.ViewModel.Client;
+using MonFit_Club.ViewModel.Client_folder;
 using MonFit_Club.ViewModel.Doctor;
 using MonFit_Club.ViewModel.Instructor;
 using Npgsql;

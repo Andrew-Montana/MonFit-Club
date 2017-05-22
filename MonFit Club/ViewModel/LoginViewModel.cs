@@ -10,6 +10,8 @@ using System.Windows.Controls;
 using MonFit_Club.Command;
 using Npgsql;
 using MonFit_Club.View;
+using MonFit_Club.ViewModel.Admin_folder;
+using MonFit_Club.View.Admin;
 
 namespace MonFit_Club.ViewModel
 {
@@ -132,7 +134,11 @@ namespace MonFit_Club.ViewModel
                     }
                     if (position == "Администратор")
                     {
-                        MessageBox.Show("Окно администратора не готово");
+                        int x;
+                        x = Convert.ToInt32(id);
+                        AdminViewModel.Employee_Id = x;
+                        AdminWindow admWindow = new AdminWindow();
+                        admWindow.Show();
                     }
                     App.Current.MainWindow.Hide();
                     

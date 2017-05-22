@@ -1,0 +1,98 @@
+﻿<Controls:MetroWindow x:Class="MonFit_Club.View.Admin.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Admin" Height="260" Width="640">
+    <Border BorderBrush="#4BAD6C" BorderThickness="1">
+        <Grid Background="#3D3C36">
+            <!-- Grid 1x1 -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!-- -->
+            <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Left" BorderBrush="White" Grid.Row="0" Grid.Column="0">
+                <TabItem Header="Профиль" Background="#3D3C36">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.2*"></RowDefinition>
+                            <RowDefinition Height="0.6*"></RowDefinition>
+                            <RowDefinition Height="0.2*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Ваши Данные" FontSize="16" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                        <!-- StackPanels -->
+                        <StackPanel Grid.Row="1" Grid.Column="0">
+                            <!-- Labels Left Side -->
+                            <Label Content="ID" HorizontalAlignment="Right"></Label>
+                            <Label Content="ФИО" HorizontalAlignment="Right"></Label>
+                            <Label Content="Должность" HorizontalAlignment="Right"></Label>
+                            <Label Content="Зарплата" HorizontalAlignment="Right"></Label>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding Person}">
+                            <!-- Labels Right Side. Binding -->
+                            <Label Content="{Binding Id, Mode=TwoWay}"></Label>
+                            <Label Content="{Binding Full_Name, Mode=TwoWay}"></Label>
+                            <Label Content="{Binding Position, Mode=TwoWay}"></Label>
+                            <TextBlock Margin="6,6,0,0">
+                                <Run Text="{Binding Salary, Mode=TwoWay}"/>
+                                <Run Text="$"/>
+                            </TextBlock>
+                        </StackPanel>
+                        <!-- stackPanels end-->
+                        <!-- Something else to add in last row. Later-->
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Клиенты" Background="#3D3C36">
+                    <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Top">
+                        <TabItem Header="Просмотреть">
+                           
+                                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding clients}" SelectedIndex="{Binding ItemIndex, Mode=TwoWay}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn IsReadOnly="True" Header="ID" Binding = "{Binding Id, Mode = TwoWay}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header = "ФИО" Binding = "{Binding Full_Name, Mode = TwoWay}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header = "Пол" Binding = "{Binding Gender, Mode = TwoWay}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header = "Телефон" Binding = "{Binding Phone_Number, Mode = TwoWay}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header = "Тип Карты" Binding = "{Binding Card_Type, Mode = TwoWay}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header = "Срок карты" Binding = "{Binding Card_Period, Mode = TwoWay}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            
+                        </TabItem>
+                        <TabItem Header="Добавить">
+                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Label Content="ID клиента"/>
+                                <TextBox Text="{Binding Path=Cl_Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="ФИО"/>
+                                <TextBox Text="{Binding Path=Cl_Full_Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="Пол"/>
+                                <TextBox Text="{Binding Path=Cl_Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="Номер телефона"/>
+                                <TextBox Text="{Binding Path=Cl_Phone_Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="Тип Карты"/>
+                                <TextBox Text="{Binding Path=Cl_Card_Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="Срок карты"/>
+                                <TextBox Text="{Binding Path=Cl_Card_Period, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <Label Content="Пароль"/>
+                                <TextBox Text="{Binding Path=Cl_Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                                <Button Margin="0,24,0,0" Command="{Binding SendClientDataCommand}" Content="Отправить"/>
+                            </StackPanel>
+
+                        </TabItem>
+                    </TabControl>
+
+                </TabItem>
+                <TabItem Header="Расписание" Background="#3D3C36">
+
+                </TabItem>
+
+            </TabControl>
+        </Grid>
+    </Border>
+</Controls:MetroWindow>
