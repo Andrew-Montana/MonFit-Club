@@ -19,7 +19,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.2*"></RowDefinition>
                             <RowDefinition Height="0.6*"></RowDefinition>
-                            <RowDefinition Height="0.2*"></RowDefinition>
+                            <RowDefinition Height="0.3*"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.3*"></ColumnDefinition>
@@ -43,6 +43,10 @@
                                 <Run Text="{Binding Salary, Mode=TwoWay}"/>
                                 <Run Text="$"/>
                             </TextBlock>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                            <TextBox Text="{Binding GetClient_addedID, Mode=TwoWay}" Width="150"/>
+                            <Button Command="{Binding GetClientById_Command}" Width="150" Content="Найти клиента по ID"/>
                         </StackPanel>
                         <!-- stackPanels end-->
                         <!-- Something else to add in last row. Later-->

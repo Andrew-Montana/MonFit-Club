@@ -19,6 +19,10 @@ namespace MonFit_Club.ViewModel
 {
     class DoctorViewModel : INotifyPropertyChanged
     {
+        //GetClientByID
+        private int getClient_addedID;
+        public int GetClient_addedID { get { return getClient_addedID; } set { getClient_addedID = value; OnPropertyChanged("GetClient_addedID"); } }
+
         // Расписание
         private string _date_visit;
         private string _client_id_list;
@@ -267,6 +271,37 @@ namespace MonFit_Club.ViewModel
             catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
             finally { DataBase.connect.Close(); }
         }
+
+        // getclient by id command
+        // GetClientById_Command
+        private RelayCommand getClientById_Command;
+        public RelayCommand GetClientById_Command
+        {
+            get
+            {
+                return getClientById_Command ??
+                    (getClientById_Command = new RelayCommand(obj =>
+                    {
+                        string query = string.Format(@"SELECT full_name from client where id = {0};", getClient_addedID.ToString());
+                        NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+                        DataBase.connect.Open();
+                        try
+                        {
+                            command.ExecuteNonQuery();
+                            NpgsqlDataReader reader = command.ExecuteReader();
+                            string answer = "";
+                            while (reader.Read())
+                            {
+                                answer = reader["full_name"].ToString();
+                            }
+                            MessageBox.Show("Имя клиента: " + answer, "Сообщение");
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+                        finally { DataBase.connect.Close(); }
+                    }));
+            }
+        }
+
 
     }
 }

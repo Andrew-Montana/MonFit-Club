@@ -1,5 +1,6 @@
 ﻿using MonFit_Club.Command;
 using MonFit_Club.Models;
+using MonFit_Club.View.Admin;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -325,15 +326,31 @@ namespace MonFit_Club.ViewModel.Admin_folder
             }
         }
 
+        // admin_ShowEditWindowCommand
+        private RelayCommand _admin_ShowEditWindowCommand;
+        public RelayCommand admin_ShowEditWindowCommand
+        {
+            get
+            {
+                return _admin_ShowEditWindowCommand ??
+                    (_admin_ShowEditWindowCommand = new RelayCommand(obj =>
+                    {
+                        var admEditwin = new Admin_EmployeeEditWin(employees[ItemEmployeeIndex].Id, employees[ItemEmployeeIndex].Full_Name, employees[ItemEmployeeIndex].Position, employees[ItemEmployeeIndex].Phone_Number, employees[ItemEmployeeIndex].Experience_Start, employees[ItemEmployeeIndex].Gender, employees[ItemEmployeeIndex].Salary.ToString(), employees[ItemEmployeeIndex].Password);
+                        admEditwin.Show();
 
-        // SendClientDataCommand
+                    }));
+            }
+        }
+
+
+        // SendEmpDataCommand
         private RelayCommand sendEmployeeDataCommand;
         public RelayCommand SendEmployeeDataCommand
         {
             get
             {
                 return sendEmployeeDataCommand ??
-                    (sendClientDataCommand = new RelayCommand(obj =>
+                    (sendEmployeeDataCommand = new RelayCommand(obj =>
                     {
                         if (emp_Full_Name != null && emp_Gender != null && emp_Phone_Number != null && emp_Experience_Start != null && emp_Salary != null && emp_Password != null && emp_Position != null)
                         {
