@@ -13,6 +13,7 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <!-- -->
+            
             <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Left" BorderBrush="White" Grid.Row="0" Grid.Column="0">
                 <TabItem Header="Профиль" Background="#3D3C36">
                     <Grid>
@@ -91,6 +92,9 @@
                                 <Button Margin="0,24,0,0" Command="{Binding SendClientDataCommand}" Content="Отправить"/>
                             </StackPanel>
 
+                        </TabItem>
+                        <TabItem Header="Функции">
+                            <Button Command="{Binding periodBonusCommand}" Content="Bonus" Width="100" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top"></Button>
                         </TabItem>
                     </TabControl>
 

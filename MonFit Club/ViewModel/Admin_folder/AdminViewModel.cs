@@ -297,6 +297,34 @@ namespace MonFit_Club.ViewModel.Admin_folder
             }
         }
 
+        // periodBonus command function. ХП
+        private RelayCommand _periodBonusCommand;
+        public RelayCommand periodBonusCommand
+        {
+            get
+            {
+                return _periodBonusCommand ??
+                    (_periodBonusCommand = new RelayCommand(obj =>
+                    {
+                        //MessageBox.Show(employees[ItemEmployeeIndex].Id.ToString());
+
+                        string query = string.Format(@"SELECT periodBonus();");
+
+                        NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+                        DataBase.connect.Open();
+                        try
+                        {
+                            command.ExecuteNonQuery();
+                            MessageBox.Show("Бонусная функция успешно произведена!","Сообщение!");
+
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+                        finally { DataBase.connect.Close(); }
+
+                    }));
+            }
+        }
+
 
         // SendClientDataCommand
         private RelayCommand sendEmployeeDataCommand;
