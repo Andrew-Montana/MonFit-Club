@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MonFit_Club.ViewModel;
+using System.ComponentModel;
 
 namespace MonFit_Club.View
 {
@@ -26,5 +27,11 @@ namespace MonFit_Club.View
             InitializeComponent();
             DataContext = new DoctorViewModel();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
+
     }
 }

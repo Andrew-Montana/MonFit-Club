@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using System.Windows.Input;
 
 namespace MonFit_Club.ViewModel
 {

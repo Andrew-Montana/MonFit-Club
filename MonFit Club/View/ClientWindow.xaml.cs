@@ -26,5 +26,11 @@ namespace MonFit_Club.View
             InitializeComponent();
             DataContext = new ClientViewModel();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
+
     }
 }
