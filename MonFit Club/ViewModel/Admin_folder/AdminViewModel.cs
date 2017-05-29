@@ -15,6 +15,10 @@ namespace MonFit_Club.ViewModel.Admin_folder
 {
     class AdminViewModel : INotifyPropertyChanged
     {
+        private int itemclientindex;
+        public int ItemClientIndex { get { return itemclientindex; } set { itemclientindex = value; OnPropertyChanged("ItemClientIndex"); } }
+        private int itememployeeindex;
+        public int ItemEmployeeIndex { get { return itememployeeindex; } set { itememployeeindex = value; OnPropertyChanged("ItemEmployeeIndex"); } }
         // fields for sending client info
 
        private string cl_Id, cl_Full_Name, cl_Gender, cl_Phone_Number, cl_Card_Type, cl_Card_Period, cl_Password;
@@ -240,6 +244,60 @@ namespace MonFit_Club.ViewModel.Admin_folder
 
         // ### employee insert
         // mvvm commands
+
+        // delete
+        private RelayCommand deleteClientCommand;
+        public RelayCommand DeleteClientCommand
+        {
+            get
+            {
+                return deleteClientCommand ??
+                    (deleteClientCommand = new RelayCommand(obj =>
+                    {
+                        string query = string.Format(@"DELETE FROM client WHERE id = {0};", clients[ItemClientIndex].Id.ToString());
+
+                        NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+                        DataBase.connect.Open();
+                        try
+                        {
+                            command.ExecuteNonQuery();
+                            MessageBox.Show("Запись успешно удалена");
+
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+                        finally { DataBase.connect.Close(); }
+                    }));
+            }
+        }
+
+        private RelayCommand deleteEmployeeCommand;
+        public RelayCommand DeleteEmployeeCommand
+        {
+            get
+            {
+                return deleteEmployeeCommand ??
+                    (deleteEmployeeCommand = new RelayCommand(obj =>
+                    {
+                        //MessageBox.Show(employees[ItemEmployeeIndex].Id.ToString());
+                        
+                        string query = string.Format(@"DELETE FROM employee WHERE id = {0};", employees[ItemEmployeeIndex].Id.ToString());
+
+                        NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
+                        DataBase.connect.Open();
+                        try
+                        {
+                            command.ExecuteNonQuery();
+                            MessageBox.Show("Запись успешно удалена");
+
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+                        finally { DataBase.connect.Close(); }
+                         
+                    }));
+            }
+        }
+
+
         // SendClientDataCommand
         private RelayCommand sendEmployeeDataCommand;
         public RelayCommand SendEmployeeDataCommand

@@ -129,7 +129,7 @@ namespace MonFit_Club.ViewModel
         private void schedule_SendDataToDB(int _empid, string _date, string _time, string _visit, string _client_list)
         {
             _client_list = "{" + _client_list + "}";
-            string query = string.Format(@"INSERT INTO schedule(employee_id, date_visit, time_visit, visit_type, client_id_list) VALUES('{0}','{1}','{2}','{3}','{4}');", _empid, _date, _time, _visit, _client_list);
+            string query = string.Format(@"INSERT INTO schedule(employee_id, date_visit, time_visit, visit_type, client_id_list, id) VALUES('{0}','{1}','{2}','{3}','{4}', (SELECT max(id)+1 from schedule));", _empid, _date, _time, _visit, _client_list);
             NpgsqlCommand command = new NpgsqlCommand(query, DataBase.connect);
             DataBase.connect.Open();
             try

@@ -25,6 +25,11 @@ namespace MonFit_Club.View.Admin
         {
             InitializeComponent();
             DataContext = new AdminViewModel();
+           
         }
+
+
+
+       
     }
 }

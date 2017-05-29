@@ -51,7 +51,7 @@
                 <TabItem Header="Мед.Карты" Background="#3D3C36">
                     <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Top">
                         <TabItem Header="Просмотреть">
-                            <StackPanel>
+                           
                                 <DataGrid Name="myGrid" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding MedCards}" SelectedIndex="{Binding ItemIndex, Mode=TwoWay}">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn>
@@ -80,7 +80,7 @@
                                         <DataGridTextColumn IsReadOnly="True" Header = "Тип телосложения" Binding = "{Binding BodyType, Mode = TwoWay}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                            </StackPanel>
+                          
                         </TabItem>
                         <TabItem Header="Добавить">
                             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

@@ -51,8 +51,8 @@
                 <TabItem Header="Клиенты" Background="#3D3C36">
                     <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Top">
                         <TabItem Header="Просмотреть">
-                           
-                                <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding clients}">
+
+                            <DataGrid Name="Удалить" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding clients}" SelectedIndex="{Binding ItemClientIndex, Mode=TwoWay}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn IsReadOnly="True" Header="ID" Binding = "{Binding Id, Mode = TwoWay}"/>
                                         <DataGridTextColumn IsReadOnly="True" Header = "ФИО" Binding = "{Binding Full_Name, Mode = TwoWay}"/>
@@ -60,7 +60,16 @@
                                         <DataGridTextColumn IsReadOnly="True" Header = "Телефон" Binding = "{Binding Phone_Number, Mode = TwoWay}"/>
                                         <DataGridTextColumn IsReadOnly="True" Header = "Тип Карты" Binding = "{Binding Card_Type, Mode = TwoWay}"/>
                                         <DataGridTextColumn IsReadOnly="True" Header = "Срок карты" Binding = "{Binding Card_Period, Mode = TwoWay}"/>
-                                    </DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Удалить">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Command="{Binding Path=DataContext.DeleteClientCommand, ElementName=grid3}">
+                                                    <Image Width="16" Height="16" Source="pack://siteoforigin:,,,/Resources/delete.png"></Image>
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
                                 </DataGrid>
                             
                         </TabItem>
@@ -91,7 +100,7 @@
                     <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Top">
                         <TabItem Header="Просмотреть">
 
-                            <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding employees}">
+                            <DataGrid Name="grid3" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding employees}" SelectedIndex="{Binding ItemEmployeeIndex, Mode=TwoWay}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn IsReadOnly="True" Header="ID" Binding = "{Binding Id, Mode = TwoWay}"/>
                                     <DataGridTextColumn IsReadOnly="True" Header = "ФИО" Binding = "{Binding Full_Name, Mode = TwoWay}"/>
@@ -100,6 +109,15 @@
                                     <DataGridTextColumn IsReadOnly="True" Header = "Телефон" Binding = "{Binding Phone_Number, Mode = TwoWay}"/>
                                     <DataGridTextColumn IsReadOnly="True" Header = "Стаж" Binding = "{Binding Experience_Start, Mode = TwoWay}"/>
                                     <DataGridTextColumn IsReadOnly="True" Header = "Зарплата" Binding = "{Binding Salary, Mode = TwoWay}"/>
+                                    <DataGridTemplateColumn Header="Удалить">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Command="{Binding Path=DataContext.DeleteEmployeeCommand, ElementName=grid3}">
+                                                    <Image Width="16" Height="16" Source="pack://siteoforigin:,,,/Resources/delete.png"></Image>
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
 
